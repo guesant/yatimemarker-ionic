@@ -1,0 +1,7 @@
+{
+  "name": "owntrain",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
