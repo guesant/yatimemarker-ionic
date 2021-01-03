@@ -1,7 +1,8 @@
 {
   "name": "owntrain",
-  "version": "0.0.1",
   "private": true,
+  "version": "0.0.1",
+  "description": "An Ionic project",
   "dependencies": {
     "@capacitor/core": "2.4.5",
     "@ionic/react": "^5.0.7",
@@ -54,6 +55,5 @@
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.5"
-  },
-  "description": "An Ionic project"
+  }
 }
