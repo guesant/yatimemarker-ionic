@@ -4,7 +4,7 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Projetos
 
-- [`lib`](./lib): biblioteca para operações da API, tipagens e interfaces.
+- [`ya-time-marker-lib`](./ya-time-marker-lib): biblioteca para operações da API, tipagens e interfaces.
 
 - [`frontend`](./frontend): HTML5 app (Ionic React).
 
