@@ -6,7 +6,6 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
-
 const Home: React.FC = () => {
   return (
     <IonPage>
@@ -16,7 +15,6 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div></div>
       </IonContent>
     </IonPage>
   );

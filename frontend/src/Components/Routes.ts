@@ -5,6 +5,7 @@ export function buildRoutes(config: RutyConfig = {}) {
 
   const ROUTE_HOME = route("home").build();
 
+
   return {
     ROUTE_HOME,
   };

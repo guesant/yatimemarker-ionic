@@ -9,19 +9,16 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import "@ionic/react/css/core.css";
-import { home, person } from "ionicons/icons";
+import { home } from "ionicons/icons";
 import React, { Suspense, lazy } from "react";
 import { Redirect, Route } from "react-router-dom";
 import LoadingPage from "./Components/LoadingPage";
-import {
   ROUTE_HOME,
 } from "./Components/Routes";
 import "./theme/variables.css";
 
-const Promise_PageHome = import("./Components/Home/Home");
-
+const Promise_PageHome = import("./Components/Pages/Home/Home");
 const PageHome = lazy(() => Promise_PageHome);
-
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
