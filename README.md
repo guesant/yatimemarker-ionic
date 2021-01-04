@@ -10,7 +10,7 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Política de Privacidade
 
-As [Versões Oficiais](#versoes-oficiais) deste app **não** coletam e **nunca** irão coletar ou reportar dados dos usuários. Os dados armazenado e histórico de uso serão salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá **exportar** e **importar** **livremente** esses dados.
+As [Versões Oficiais](#versões-oficiais) deste app **não** coletam e **nunca** irão coletar ou reportar dados dos usuários. Os dados armazenado e histórico de uso serão salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá **exportar** e **importar** **livremente** esses dados.
 
 **Porém**, por ser um app [open source e livre](#licensa), **forks poderão aparecer**, e desses [eu](https://github.com/guesant) **não** possuirei controle.
 
@@ -59,7 +59,7 @@ pnpm run prod:build
 
 ## Versões Oficiais
 
-São consideradas [Versões Oficiais](#versoes-oficiais) as distribuições deste app por meio dos canais:
+São consideradas [Versões Oficiais](#versões-oficiais) as distribuições deste app por meio dos canais:
 
 - <https://yatime.surge.sh> - Versão PWA (servido via HTTPS).
 
