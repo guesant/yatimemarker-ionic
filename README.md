@@ -10,13 +10,24 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Política de Privacidade
 
-As [Versões Oficiais](#versões-oficiais) deste app **não** coletam e **nunca** irão coletar ou reportar dados dos usuários. Os dados armazenado e histórico de uso serão salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá **exportar** e **importar** **livremente** esses dados.
+<details>
+  <summary>Clique para ver mais</summary>
+
+As [Versões Oficiais](#versões-oficiais) deste app **não** coletam e **nunca** irão coletar ou reportar dados dos usuários. Os dados armazenado e histórico de uso são salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá **exportar** e **importar** **livremente** esses dados.
 
 **Porém**, por ser um app [open source e livre](#licensa), **forks poderão aparecer**, e desses [eu](https://github.com/guesant) **não** possuirei controle.
 
+</details>
+
 ## Desenvolvimento
 
+<details>
+  <summary>Clique para ver mais</summary>
+
 ### Preparando o Ambiente
+
+<details>
+  <summary>Clique para ver mais</summary>
 
 Instale o gerenciador de pacotes [`pnpm`](https://pnpm.js.org/) caso ainda não o tenha.
 
@@ -30,7 +41,12 @@ Também é necessário ter o [`@ionic/cli`](https://www.npmjs.com/package/@ionic
 npm install -g @ionic/cli
 ```
 
+</details>
+
 ### Obtendo o código fonte do projeto
+
+<details>
+  <summary>Clique para ver mais</summary>
 
 ```sh
 git clone https://github.com/guesant/ya-time-marker-ionic.git
@@ -38,26 +54,32 @@ cd ya-time-marker-ionic
 pnpm install
 ```
 
+</details>
+
 ### Executando o projeto
+
+<details>
+  <summary>Clique para ver mais</summary>
 
 ```sh
 cd frontend
-
-# servidor local do app (escuta mudanças nos arquivos)
 ionic serve
 ```
 
 ```sh
 cd ya-time-marker-lib
-
-# dev scripts (escuta mudanças nos arquivos)
 pnpm run dev:watch
-
-# prod scripts (versão de produção)
 pnpm run prod:build
 ```
 
+</details>
+
+</details>
+
 ## Versões Oficiais
+
+<details>
+  <summary>Clique para ver mais</summary>
 
 São consideradas [Versões Oficiais](#versões-oficiais) as distribuições deste app por meio dos canais:
 
@@ -65,7 +87,12 @@ São consideradas [Versões Oficiais](#versões-oficiais) as distribuições des
 
 Fique livre e a vontade para os utilizar :)
 
+</details>
+
 ## Agradecimentos
+
+<details>
+  <summary>Clique para ver mais</summary>
 
 Obrigado a todos os contribuidores diretos e indiretos das bibliotecas usadas no projeto.
 
@@ -90,6 +117,8 @@ Dentre elas se destacam:
 - pnpm
 
 - ... e muitas outras
+
+</details>
 
 ## Autor
 
