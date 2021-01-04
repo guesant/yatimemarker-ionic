@@ -26,9 +26,6 @@ As [Versões Oficiais](#versões-oficiais) deste app **não** coletam e **nunca*
 
 ### Preparando o Ambiente
 
-<details>
-  <summary>Clique para ver mais</summary>
-
 Instale o gerenciador de pacotes [`pnpm`](https://pnpm.js.org/) caso ainda não o tenha.
 
 ```sh
@@ -41,12 +38,7 @@ Também é necessário ter o [`@ionic/cli`](https://www.npmjs.com/package/@ionic
 npm install -g @ionic/cli
 ```
 
-</details>
-
 ### Obtendo o código fonte do projeto
-
-<details>
-  <summary>Clique para ver mais</summary>
 
 ```sh
 git clone https://github.com/guesant/ya-time-marker-ionic.git
@@ -54,12 +46,7 @@ cd ya-time-marker-ionic
 pnpm install
 ```
 
-</details>
-
 ### Executando o projeto
-
-<details>
-  <summary>Clique para ver mais</summary>
 
 ```sh
 cd frontend
@@ -71,8 +58,6 @@ cd ya-time-marker-lib
 pnpm run dev:watch
 pnpm run prod:build
 ```
-
-</details>
 
 </details>
 
