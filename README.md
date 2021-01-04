@@ -97,4 +97,4 @@ Gabriel Rodrigues - [@guesant](https://github.com/guesant)
 
 ## Licensa
 
-MIT
+[MIT](./LICENSE.mit.txt)
