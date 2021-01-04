@@ -14,6 +14,7 @@ dependencies:
   '@types/react-dom': 16.9.10
   '@types/react-router': 5.1.9
   '@types/react-router-dom': 5.1.7
+  '@ya-time-marker/lib': 'link:../ya-time-marker-lib'
   autoprefixer: 9.8.6
   immer: 8.0.0
   ionicons: 5.2.3
@@ -12970,6 +12971,7 @@ specifiers:
   '@types/react-dom': ^16.9.4
   '@types/react-router': ^5.1.4
   '@types/react-router-dom': ^5.1.3
+  '@ya-time-marker/lib': 'link:../ya-time-marker-lib'
   autoprefixer: ^9.8.6
   immer: ^8.0.0
   ionicons: ^5.0.0
