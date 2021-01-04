@@ -1,10 +1,11 @@
 import { ITrain } from "../../Interfaces/ITrain";
-import { DB_TRAINS } from "../../db";
+import { getDbTrains } from "../../db";
 
 export async function getTrains() {
-  const { rows } = await DB_TRAINS.allDocs<ITrain>({
+  const dbTrains = await getDbTrains();
+  const { rows } = await dbTrains.allDocs<ITrain>({
     include_docs: true,
-    descending: true,
+    descending: false,
   });
   return rows.map(({ doc }) => doc);
 }

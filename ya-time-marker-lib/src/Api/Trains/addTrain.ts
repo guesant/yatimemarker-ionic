@@ -1,7 +1,8 @@
 import { nanoid } from "nanoid";
 import { ITrain } from "../../Interfaces/ITrain";
-import { DB_TRAINS } from "../../db";
+import { getDbTrains } from "../../db";
 
 export async function addTrain(train: ITrain) {
-  await DB_TRAINS.put({ _id: "id" + nanoid(), ...train });
+  const dbTrains = await getDbTrains();
+  await dbTrains.put({ _id: "id" + nanoid(), ...train });
 }

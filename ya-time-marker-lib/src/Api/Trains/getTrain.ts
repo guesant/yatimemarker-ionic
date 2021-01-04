@@ -1,7 +1,8 @@
 import { ITrain } from "../../Interfaces/ITrain";
-import { DB_TRAINS } from "../../db";
+import { getDbTrains } from "../../db";
 
 export async function getTrain(id: string) {
-  const trainDoc = await DB_TRAINS.get<ITrain>(id);
+  const dbTrains = await getDbTrains();
+  const trainDoc = await dbTrains.get<ITrain>(id);
   return trainDoc;
 }
