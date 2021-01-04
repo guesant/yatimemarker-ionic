@@ -15,6 +15,7 @@ import { Redirect, Route } from "react-router-dom";
 import LoadingPage from "./Components/LoadingPage";
   ROUTE_HOME,
 } from "./Components/Routes";
+import "./App.css";
 import "./theme/variables.css";
 
 const Promise_PageHome = import("./Components/Pages/Home/Home");
