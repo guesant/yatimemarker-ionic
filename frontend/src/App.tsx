@@ -26,7 +26,7 @@ const PageHome = lazy(() => Promise_PageHome);
 const PageProfile = lazy(() => Promise_PageProfile);
 
 const App: React.FC = () => (
-  <IonApp>
+  <IonApp className="App">
     <IonReactRouter>
       <Suspense fallback={<LoadingPage />}>
         <IonRouterOutlet>
