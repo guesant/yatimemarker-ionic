@@ -4,75 +4,25 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Projetos internos
 
-- [`frontend`](./frontend): App Ionic React (HTML5+Javascript).
+- [`frontend`](./frontend): Aplicativo HTML5+Javascript feito com Ionic React.
 
-- [`ya-time-marker-lib`](./ya-time-marker-lib): operações da API; tipagens; interfaces.
+- [`ya-time-marker-lib`](./ya-time-marker-lib): operações da API; tipagens; interfaces; etc.
 
 ## Política de Privacidade
 
-<details>
-  <summary>Clique para ver mais</summary>
-
-As [Versões Oficiais](#versões-oficiais) deste app **não** coletam e **nunca** irão coletar ou reportar dados dos usuários. Os dados armazenado e histórico de uso são salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá **exportar** e **importar** **livremente** esses dados.
+As [Versões Oficiais](#versões-oficiais) deste app **não** coletam e **nunca** irão coletar ou reportar dados dos usuários. Os dados armazenado e histórico de uso são salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá **exportar**, **importar** e excluir **livremente** esses dados.
 
 **Porém**, por ser um app [open source e livre](#licensa), **forks poderão aparecer**, e desses [eu](https://github.com/guesant) **não** possuirei controle.
 
-</details>
-
 ## Desenvolvimento
 
-<details>
-  <summary>Clique para ver mais</summary>
-
-### Preparando o Ambiente
-
-Instale o gerenciador de pacotes [`pnpm`](https://pnpm.js.org/) caso ainda não o tenha.
-
-```sh
-npm install -g pnpm
-```
-
-Também é necessário ter o [`@ionic/cli`](https://www.npmjs.com/package/@ionic/cli) instalado. Veja a [documentação oficial](https://ionicframework.com/docs/intro/cli#install-the-ionic-cli) para obter mais informações.
-
-```sh
-npm install -g @ionic/cli
-```
-
-### Obtendo o código fonte do projeto
-
-```sh
-git clone https://github.com/guesant/ya-time-marker-ionic.git
-cd ya-time-marker-ionic
-pnpm install
-```
-
-### Executando o projeto
-
-```sh
-cd frontend
-ionic serve
-```
-
-```sh
-cd ya-time-marker-lib
-pnpm run dev:watch
-pnpm run prod:build
-```
-
-</details>
+Veja nosso [guia de desenvolvimento](./docs/Development-Workspace.md).
 
 ## Versões Oficiais
-
-<details>
-  <summary>Clique para ver mais</summary>
 
 São consideradas [Versões Oficiais](#versões-oficiais) as distribuições deste app por meio dos canais:
 
 - <https://yatime.surge.sh> - Versão PWA (servido via HTTPS).
-
-Fique livre e a vontade para os utilizar :)
-
-</details>
 
 ## Agradecimentos
 
