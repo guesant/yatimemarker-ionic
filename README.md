@@ -4,9 +4,9 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Projetos internos
 
-- [`./frontend`](./frontend): App Ionic React (HTML5+Javascript).
+- [`frontend`](./frontend): App Ionic React (HTML5+Javascript).
 
-- [`./ya-time-marker-lib`](./ya-time-marker-lib): operações da API; tipagens; interfaces.
+- [`ya-time-marker-lib`](./ya-time-marker-lib): operações da API; tipagens; interfaces.
 
 ## Política de Privacidade
 
