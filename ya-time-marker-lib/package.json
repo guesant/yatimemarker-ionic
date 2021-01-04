@@ -4,8 +4,10 @@
   "main": "./build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "script:prepare": "rm -rf build; mkdir -p build;",
     "dev:watch": "tsc --watch -p .",
-    "prod:build": "tsc -p ."
+    "prod:build": "pnpm run script:prepare; tsc -p .",
+    "prepare": "pnpm run prod:build"
   },
   "author": "Gabriel Rodrigues",
   "license": "MIT",
