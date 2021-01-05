@@ -4,7 +4,7 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Política de Privacidade
 
-As [Versões Oficiais](#versões-oficiais) deste app **não coletam** e **nunca irão** coletar ou reportar dados dos usuários. Os dados armazenados e histórico de uso são salvos **localmente** por meio das bibliotecas PouchDB e LocalForage. Se o usuário optar, poderá {**importar**; **exportar**; **excluir**} livremente esses dados.
+As [Versões Oficiais](#versões-oficiais) deste app **não coletam e nunca irão coletar ou reportar dados dos usuários**. Os dados armazenados e histórico de uso são **salvos localmente** por meio das bibliotecas PouchDB e LocalForage. Se o usuário optar, poderá **importar**, **exportar** e **excluir** livremente esses dados.
 
 ## Desenvolvimento
 
