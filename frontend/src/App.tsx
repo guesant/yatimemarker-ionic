@@ -12,7 +12,6 @@ import {
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
 } from "./Components/Routes";
-import "./App.css";
 import "./theme/variables.css";
 
 const Promise_PageHome = import("./Components/Pages/Home/Home");
