@@ -9,12 +9,14 @@ import LoadingPage from "./Components/LoadingPage";
 import {
   ROUTE_HOME,
   ROUTE_PROFILE,
+  ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
 } from "./Components/Routes";
 import "./theme/variables.css";
 
 const Promise_PageHome = import("./Components/Pages/Home/Home");
+const Promise_PageSearch = import("./Components/Pages/Search/Search");
 const Promise_PageProfile = import("./Components/Pages/Profile/Profile");
 const Promise_PageSettings = import("./Components/Pages/Settings/Settings");
 const Promise_PageNewTrain = import(
@@ -22,6 +24,7 @@ const Promise_PageNewTrain = import(
 );
 
 const PageHome = lazy(() => Promise_PageHome);
+const PageSearch = lazy(() => Promise_PageSearch);
 const PageProfile = lazy(() => Promise_PageProfile);
 const PageSettings = lazy(() => Promise_PageSettings);
 const PageNewTrain = lazy(() => Promise_PageNewTrain);
@@ -32,6 +35,7 @@ const App: React.FC = () => (
       <Suspense fallback={<LoadingPage />}>
         <IonRouterOutlet>
           <Route path={ROUTE_HOME()} component={PageHome} exact={true} />
+          <Route path={ROUTE_SEARCH()} component={PageSearch} exact />
           <Route path={ROUTE_PROFILE()} component={PageProfile} exact={true} />
           <Route
             path={ROUTE_SETTINGS()}
