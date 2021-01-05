@@ -39,6 +39,8 @@ Dentre elas se destacam:
 
 - MaterialUI
 
+- MiniSearch
+
 - Typescript
 
 - TailwindCSS
