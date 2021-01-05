@@ -14,7 +14,7 @@ import { Api, ITrain } from "@ya-time-marker/lib";
 import { ellipsisHorizontal, ellipsisVertical, search } from "ionicons/icons";
 import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { ROUTE_SEARCH, ROUTE_SETTINGS } from "../../Routes";
+import { ROUTE_SEARCH, ROUTE_SETTINGS, ROUTE_TRAIN_NEW } from "../../Routes";
 import TrainCard from "../../TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
             (e.target as HTMLIonRefresherElement).complete();
           }}
         >
-          <IonRefresherContent></IonRefresherContent>
+          <IonRefresherContent />
         </IonRefresher>
         <>
           <div>
@@ -124,6 +124,17 @@ const Home: React.FC = () => {
             </IonPopover>
           </div>
         </>
+
+        <IonList>
+          <IonItem
+            onClick={() => history.push(ROUTE_TRAIN_NEW())}
+            button
+            detail
+          >
+            Cadastrar Novo Treino
+          </IonItem>
+        </IonList>
+
         <div>
           {trains.map((train, idx) => (
             <Fragment
