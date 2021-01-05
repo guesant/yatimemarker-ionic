@@ -1,8 +1,11 @@
-import { object } from "yup";
+import { object, string } from "yup";
 
 export type ISettingsState = {
+  theme: "_auto" | "dark" | "light";
 };
 
 export const settingsSchema = object()
-  .shape({})
+  .shape({
+    theme: string().default("_auto"),
+  })
   .default(() => ({}));

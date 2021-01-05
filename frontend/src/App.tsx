@@ -16,6 +16,7 @@ import LoadingPage from "./Components/LoadingPage";
 import {
   ROUTE_HOME,
   ROUTE_PROFILE,
+  ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
 } from "./Components/Routes";
 import "./App.css";
@@ -23,12 +24,14 @@ import "./theme/variables.css";
 
 const Promise_PageHome = import("./Components/Pages/Home/Home");
 const Promise_PageProfile = import("./Components/Pages/Profile/Profile");
+const Promise_PageSettings = import("./Components/Pages/Settings/Settings");
 const Promise_PageNewTrain = import(
   "./Components/Pages/Train/NewTrain/NewTrain"
 );
 
 const PageHome = lazy(() => Promise_PageHome);
 const PageProfile = lazy(() => Promise_PageProfile);
+const PageSettings = lazy(() => Promise_PageSettings);
 const PageNewTrain = lazy(() => Promise_PageNewTrain);
 
 const App: React.FC = () => (
@@ -36,28 +39,13 @@ const App: React.FC = () => (
     <IonReactRouter>
       <Suspense fallback={<LoadingPage />}>
         <IonRouterOutlet>
-          <Route path={[ROUTE_HOME(), ROUTE_PROFILE()]}>
-            <IonTabs>
-              <IonRouterOutlet>
-                <Route path={ROUTE_HOME()} component={PageHome} exact={true} />
-                <Route
-                  path={ROUTE_PROFILE()}
-                  component={PageProfile}
-                  exact={true}
-                />
-              </IonRouterOutlet>
-              <IonTabBar slot="bottom">
-                <IonTabButton tab="home" href={ROUTE_HOME()}>
-                  <IonIcon icon={home} />
-                  <IonLabel>Início</IonLabel>
-                </IonTabButton>
-                <IonTabButton tab="profile" href={ROUTE_PROFILE()}>
-                  <IonIcon icon={person} />
-                  <IonLabel>Meu Perfil</IonLabel>
-                </IonTabButton>
-              </IonTabBar>
-            </IonTabs>
-          </Route>
+          <Route path={ROUTE_HOME()} component={PageHome} exact={true} />
+          <Route path={ROUTE_PROFILE()} component={PageProfile} exact={true} />
+          <Route
+            path={ROUTE_SETTINGS()}
+            component={PageSettings}
+            exact={true}
+          />
           <Route
             path={ROUTE_TRAIN_NEW()}
             component={PageNewTrain}
