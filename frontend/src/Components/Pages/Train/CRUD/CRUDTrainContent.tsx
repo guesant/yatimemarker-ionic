@@ -49,7 +49,7 @@ const CRUDTrainContent: React.FC<CRUDTrainContentProps> = ({
   }
 
   useEffect(() => {
-    if (train.steps.length === 0 && !isEditMode) {
+    if (train.steps.length === 0 && isEditMode) {
       newStep();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
