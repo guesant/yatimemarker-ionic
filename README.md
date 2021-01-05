@@ -4,7 +4,7 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 ## Política de Privacidade
 
-As [Versões Oficiais](#versões-oficiais) deste app **não coletam** e **nunca irão** coletar ou reportar dados dos usuários. Os dados armazenados e histórico de uso são salvos **localmente** por meio da biblioteca **PouchDB**. Se o usuário optar, poderá {**importar**; **exportar**; **excluir**} **livremente** esses dados.
+As [Versões Oficiais](#versões-oficiais) deste app **não coletam** e **nunca irão** coletar ou reportar dados dos usuários. Os dados armazenados e histórico de uso são salvos **localmente** por meio das bibliotecas PouchDB e LocalForage. Se o usuário optar, poderá {**importar**; **exportar**; **excluir**} livremente esses dados.
 
 **Porém**, por ser um app [open source e livre](#licensa), **forks poderão aparecer**, e desses **[eu](https://github.com/guesant) não possuirei controle**.
 
@@ -35,6 +35,8 @@ Dentre elas se destacam:
 
 - PostCSS
 
+- Redux
+
 - PouchDB
 
 - MaterialUI
@@ -44,6 +46,10 @@ Dentre elas se destacam:
 - Typescript
 
 - TailwindCSS
+
+- React-Redux
+
+- Redux-Toolkit
 
 - pnpm
 
