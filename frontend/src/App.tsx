@@ -1,17 +1,10 @@
-import {
-  IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-} from "@ionic/react";
+import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import "@ionic/react/css/core.css";
-import { home, person } from "ionicons/icons";
-import React, { Suspense, lazy } from "react";
+import React, { lazy, Suspense } from "react";
 import { Redirect, Route } from "react-router-dom";
+import "./App.css";
+import "./Assets/tw-dist.css";
 import LoadingPage from "./Components/LoadingPage";
 import {
   ROUTE_HOME,

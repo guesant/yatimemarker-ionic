@@ -40,8 +40,8 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "css:dev": "npx tailwindcss build ./src/Assets/tailwind.css -o public/tw-dist.css",
-    "css:prod": "NODE_ENV=production npx tailwindcss build ./src/Assets/tailwind.css -o public/tw-dist.css",
+    "css:dev": "npx tailwindcss build ./src/Assets/tailwind.css -o ./src/Assets/tw-dist.css",
+    "css:prod": "NODE_ENV=production npx tailwindcss build ./src/Assets/tailwind.css -o ./src/Assets/tw-dist.css",
     "start": "npm run css:dev && react-scripts start",
     "build": "npm run css:prod && react-scripts build",
     "test": "react-scripts test",
