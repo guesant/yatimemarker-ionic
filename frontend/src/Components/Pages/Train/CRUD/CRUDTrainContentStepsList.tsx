@@ -14,19 +14,27 @@ const CRUDTrainContentStepsList: React.FC<CRUDTrainContentStepsListProps> = ({
 }) => {
   return (
     <IonList>
-      {train.steps.map(({ meta: { description } }, idx) => (
-        <Fragment
-          key={idx}
-          children={
-            <IonItem
-              detail={false}
-              button={isEditMode}
-              onClick={() => isEditMode && toEditIndex(idx)}
-              children={<IonLabel>{description}</IonLabel>}
-            />
-          }
-        />
-      ))}
+      {!train.steps.length && (
+        <IonLabel>
+          {isEditMode
+            ? "Ainda não possui passos. Acrescente um no botão abaixo."
+            : "Não possui nenhum passo."}
+        </IonLabel>
+      )}
+      {train.steps.length > 0 &&
+        train.steps.map(({ meta: { description } }, idx) => (
+          <Fragment
+            key={idx}
+            children={
+              <IonItem
+                detail={false}
+                button={isEditMode}
+                onClick={() => isEditMode && toEditIndex(idx)}
+                children={<IonLabel>{description}</IonLabel>}
+              />
+            }
+          />
+        ))}
     </IonList>
   );
 };
