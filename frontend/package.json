@@ -43,7 +43,7 @@
   },
   "scripts": {
     "dev:start": "ionic serve",
-    "prod:build": "GENERATE_SOURCEMAP=false ionic build && cp build/index.html build/200.html",
+    "prod:build": "(mkdir -p build; rm -rf build;); GENERATE_SOURCEMAP=false ionic build && cp build/index.html build/200.html",
     "css:dev": "npx tailwindcss build ./src/Assets/tailwind.css -o ./src/Assets/tw-dist.css",
     "css:prod": "NODE_ENV=production npx tailwindcss build ./src/Assets/tailwind.css -o ./src/Assets/tw-dist.css",
     "start": "npm run css:dev && react-scripts start",
