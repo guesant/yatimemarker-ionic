@@ -6,8 +6,6 @@ Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](htt
 
 As [Versões Oficiais](#versões-oficiais) deste app **não coletam** e **nunca irão** coletar ou reportar dados dos usuários. Os dados armazenados e histórico de uso são salvos **localmente** por meio das bibliotecas PouchDB e LocalForage. Se o usuário optar, poderá {**importar**; **exportar**; **excluir**} livremente esses dados.
 
-**Porém**, por ser um app [open source e livre](#licensa), **forks poderão aparecer**, e desses **[eu](https://github.com/guesant) não possuirei controle**.
-
 ## Desenvolvimento
 
 Veja nosso [guia de desenvolvimento](./docs/Development-Workspace.md).
@@ -29,13 +27,13 @@ Dentre elas se destacam:
 
 - Ruty
 
+- Redux
+
 - Ionic
 
 - ReactJS
 
 - PostCSS
-
-- Redux
 
 - PouchDB
 
