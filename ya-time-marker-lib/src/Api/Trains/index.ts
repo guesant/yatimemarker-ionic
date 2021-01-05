@@ -3,3 +3,4 @@ export * from "./deleteTrain";
 export * from "./getTrain";
 export * from "./getTrains";
 export * from "./searchTrains";
+export * from "./searchSuggestions";
