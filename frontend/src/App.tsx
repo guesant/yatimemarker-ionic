@@ -16,14 +16,20 @@ import LoadingPage from "./Components/LoadingPage";
 import {
   ROUTE_HOME,
   ROUTE_PROFILE,
+  ROUTE_TRAIN_NEW,
 } from "./Components/Routes";
 import "./App.css";
 import "./theme/variables.css";
 
 const Promise_PageHome = import("./Components/Pages/Home/Home");
 const Promise_PageProfile = import("./Components/Pages/Profile/Profile");
+const Promise_PageNewTrain = import(
+  "./Components/Pages/Train/NewTrain/NewTrain"
+);
+
 const PageHome = lazy(() => Promise_PageHome);
 const PageProfile = lazy(() => Promise_PageProfile);
+const PageNewTrain = lazy(() => Promise_PageNewTrain);
 
 const App: React.FC = () => (
   <IonApp className="App">
@@ -52,6 +58,11 @@ const App: React.FC = () => (
               </IonTabBar>
             </IonTabs>
           </Route>
+          <Route
+            path={ROUTE_TRAIN_NEW()}
+            component={PageNewTrain}
+            exact={true}
+          />
           <Route
             path="/"
             render={() => <Redirect to={ROUTE_HOME()} />}
