@@ -1,13 +1,12 @@
 import MiniSearch from "minisearch";
 import { getDbTrains } from "../../../db";
 import { ITrain } from "../../../Interfaces/ITrain";
-import { ISearchTrainsOptions } from "./ISearchTrainsOptions";
-import { searchFieldsToFields } from "./searchFieldsToFields";
 import { extractField } from "./extractField";
+import { ISearchTrainsOptions } from "./ISearchTrainsOptions";
 
 export async function searchTrains(
   searchQuery: string,
-  { searchFields = { title: true, steps: false } }: ISearchTrainsOptions = {}
+  { searchFields = ["title"] }: ISearchTrainsOptions = {}
 ) {
   const dbTrains = await getDbTrains();
 
@@ -22,8 +21,8 @@ export async function searchTrains(
 
   const miniSearch = new MiniSearch({
     extractField,
+    fields: searchFields,
     storeFields: ["id", "title"],
-    fields: searchFieldsToFields(searchFields || {}),
   });
 
   miniSearch.addAll(docs);
