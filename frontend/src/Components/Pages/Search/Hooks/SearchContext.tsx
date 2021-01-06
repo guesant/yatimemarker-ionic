@@ -30,8 +30,8 @@ export const SearchContextProvider: React.FC = ({ children }) => {
   const fetchSearch = useCallback(
     debounce(
       async (searchQuery: string, searchOptionsRef: typeof searchOptions) => {
-        setSearchResults([]);
         setIsLoading(true);
+        setSearchResults([]);
         try {
           if (searchQuery.trim()) {
             setSearchResults(

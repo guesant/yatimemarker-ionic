@@ -1,23 +1,16 @@
 import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { SearchContext, SearchContextProvider } from "./Hooks/SearchContext";
+import { ITextSearchModes } from "./ITextSearchModes";
 import SearchHeader from "./SearchHeader";
 import SearchResultContent from "./SearchResultContent";
 import SearchSuggestionsContent from "./SearchSuggestionsContent";
-
-const SEARCH_MODE_RESULTS = Symbol("results");
-const SEARCH_MODE_SUGGESTIONS = Symbol("suggestions");
-
-type TextSearchModes = "results" | "suggestions";
-type SymbolSearchModes =
-  | typeof SEARCH_MODE_RESULTS
-  | typeof SEARCH_MODE_SUGGESTIONS;
-
-const getSearchMode = (mode: TextSearchModes): SymbolSearchModes | null =>
-  (({
-    results: SEARCH_MODE_RESULTS,
-    suggestions: SEARCH_MODE_SUGGESTIONS,
-  }[mode] || null) as any);
+import {
+  SymbolSearchModes,
+  SEARCH_MODE_RESULTS,
+  SEARCH_MODE_SUGGESTIONS,
+  getSearchMode,
+} from "./SEARCH_MODES";
 
 const SearchPage: React.FC = () => {
   const searchInputRef = useRef<HTMLIonInputElement>(null);
@@ -32,9 +25,12 @@ const SearchPage: React.FC = () => {
     setAutoFetchResults: setAutoFetch,
   } = useContext(SearchContext);
 
-  function changeSearchMode(mode: TextSearchModes) {
-    getSearchMode(mode) && setSearchMode(getSearchMode(mode)!);
-  }
+  const changeSearchMode = (mode: ITextSearchModes) => {
+    const newSearchMode = getSearchMode(mode);
+    if (newSearchMode && newSearchMode !== searchMode) {
+      setSearchMode(newSearchMode);
+    }
+  };
 
   useEffect(() => {
     switch (searchMode) {
@@ -51,6 +47,7 @@ const SearchPage: React.FC = () => {
     if (searchMode !== SEARCH_MODE_SUGGESTIONS) {
       changeSearchMode("suggestions");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   useEffect(() => {
@@ -75,6 +72,7 @@ const SearchPage: React.FC = () => {
         formInput.removeEventListener("submit", handleFormSubmit);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInputRef, formInputRef]);
 
   return (
@@ -89,10 +87,8 @@ const SearchPage: React.FC = () => {
         {searchMode === SEARCH_MODE_RESULTS && <SearchResultContent />}
         {searchMode === SEARCH_MODE_SUGGESTIONS && (
           <SearchSuggestionsContent
-            updateSeachText={(newSearchText, mode) => {
-              changeSearchMode(mode);
-              setSearchText(newSearchText);
-            }}
+            changeSearchMode={changeSearchMode}
+            setSearchText={setSearchText}
           />
         )}
       </IonContent>
