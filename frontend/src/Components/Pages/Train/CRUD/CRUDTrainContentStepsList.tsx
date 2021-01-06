@@ -1,5 +1,4 @@
-import { IonList, IonItem, IonLabel } from "@ionic/react";
-import { ITrain } from "@ya-time-marker/lib";
+import { IonItem, IonLabel, IonList } from "@ionic/react";
 import React, { Fragment } from "react";
 import { CRUDTrainProps } from "./CRUDTrainProps";
 
