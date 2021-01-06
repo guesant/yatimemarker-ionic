@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { setSettings } from "../../../Store/settings/actions/setSettings";
 import { getSettings } from "../../../Store/settings/selectors/getSettings";
+
 const Settings: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,11 +35,11 @@ const Settings: React.FC = () => {
         setSettings(
           produce(settings, (draft: any) => {
             draft.theme = theme;
-          }),
-        ),
+          })
+        )
       );
     },
-    [settings],
+    [dispatch, settings]
   );
 
   return (
@@ -53,6 +54,7 @@ const Settings: React.FC = () => {
           <IonTitle>Configurações</IonTitle>
         </IonToolbar>
       </IonHeader>
+      <IonContent>
         <div>
           <IonList>
             <IonListHeader>
