@@ -25,7 +25,9 @@ const SearchSuggestionsList: React.FC = () => {
           <Fragment key={suggestion}>
             <IonItem
               button
-              onClick={() => updateSearchText(suggestion, "results")}
+              onClick={() => {
+                updateSearchText(suggestion, "results");
+              }}
               detail={false}
             >
               <IonButton

@@ -47,9 +47,15 @@ const SearchHeader: React.FC = () => {
             value={searchText}
             ref={searchInputRef}
             placeholder="Buscar..."
-            onIonChange={(e) =>
-              updateSearchText(e.detail.value!, "suggestions")
-            }
+            onFocus={() => {
+              updateSearchText(searchText, "suggestions");
+            }}
+            onIonChange={(e) => {
+              const newSearchText = e.detail.value!;
+              if (searchText !== newSearchText) {
+                updateSearchText(newSearchText, "suggestions");
+              }
+            }}
           />
         </form>
       </IonToolbar>

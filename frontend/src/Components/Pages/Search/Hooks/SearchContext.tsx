@@ -81,8 +81,10 @@ export const SearchContextProvider: React.FC = ({ children }) => {
   }, [isMode, fetchSearchResults, searchText, searchOptions, autoFetchResults]);
 
   const updateSearchText = (newSearchText: string, mode: ITextSearchModes) => {
+    if (newSearchText !== searchText) {
+      setSearchText(newSearchText);
+    }
     changeSearchMode(mode);
-    setSearchText(newSearchText);
   };
 
   return (
