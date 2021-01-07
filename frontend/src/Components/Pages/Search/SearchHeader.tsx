@@ -8,21 +8,14 @@ import {
   useIonViewDidEnter,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useRef } from "react";
 import { useHistory } from "react-router";
 import { SearchContext } from "./Hooks/SearchContext";
 
-export type SearchHeaderProps = {
-  formInputRef: React.RefObject<HTMLFormElement>;
-  searchInputRef: React.RefObject<HTMLIonInputElement>;
-};
-
-const SearchHeader: React.FC<SearchHeaderProps> = ({
-  searchInputRef,
-  formInputRef,
-}) => {
+const SearchHeader: React.FC = () => {
   const history = useHistory();
-  const { searchText, setSearchText } = useContext(SearchContext);
+  const { searchText, updateSearchText } = useContext(SearchContext);
+  const searchInputRef = useRef<HTMLIonInputElement>(null);
 
   useIonViewDidEnter(() => {
     (async () => {
@@ -40,18 +33,23 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
         </div>
         <IonButtons slot="start">
           <IonButton
-            onClick={() => {
-              history.goBack();
-            }}
+            onClick={() => history.goBack()}
             children={<IonIcon icon={arrowBack} />}
           />
         </IonButtons>
-        <form ref={formInputRef}>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            updateSearchText(searchText, "results");
+          }}
+        >
           <IonInput
-            ref={searchInputRef}
             value={searchText}
+            ref={searchInputRef}
             placeholder="Buscar..."
-            onIonChange={(e) => setSearchText(e.detail.value!)}
+            onIonChange={(e) =>
+              updateSearchText(e.detail.value!, "suggestions")
+            }
           />
         </form>
       </IonToolbar>

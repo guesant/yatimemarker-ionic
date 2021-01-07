@@ -32,13 +32,6 @@ const SearchResultContent: React.FC<SearchResultContentProps> = () => {
             <div>
               {!isLoading && (
                 <>
-                  {!searchResults.length && (
-                    <div className="tw-py-4">
-                      <div className="tw-px-4">
-                        <IonLabel>Nenhum resultado encontrado.</IonLabel>
-                      </div>
-                    </div>
-                  )}
                   {searchResults.length > 0 && (
                     <div className="tw-py-1">
                       <IonList className="tw-py-0">
@@ -55,6 +48,13 @@ const SearchResultContent: React.FC<SearchResultContentProps> = () => {
                           </Fragment>
                         ))}
                       </IonList>
+                    </div>
+                  )}
+                  {!searchResults.length && (
+                    <div className="tw-py-4">
+                      <div className="tw-px-4">
+                        <IonLabel>Nenhum resultado encontrado.</IonLabel>
+                      </div>
                     </div>
                   )}
                 </>

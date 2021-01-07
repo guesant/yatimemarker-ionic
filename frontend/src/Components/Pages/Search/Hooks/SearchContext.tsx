@@ -2,32 +2,47 @@ import { Api } from "@ya-time-marker/lib";
 import debounce from "lodash.debounce";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { StateSetter } from "../../../../types/StateSetter";
-
-const {
-  Trains: { searchTrains },
-} = Api;
-
-export const SearchContext = createContext<ISearchContext>({} as any);
+import { IChangeSeachMode, useSearchMode } from "./SearchMode";
+import { ITextSearchModes } from "./searchModes/SEARCH_MODES";
 
 export type ISearchContext = {
+  isMode: (mode: ITextSearchModes) => boolean;
   isLoading: boolean;
   searchText: string;
   searchResults: any[];
   searchOptions: string[];
-  autoFetchResults: boolean;
-  setSearchText: StateSetter<ISearchContext["searchText"]>;
+  searchSuggestions: any[];
   setSearchOptions: StateSetter<ISearchContext["searchOptions"]>;
-  setAutoFetchResults: StateSetter<ISearchContext["autoFetchResults"]>;
+  setAutoFetchResults: StateSetter<boolean>;
+  updateSearchText: (newSearchText: string, mode: ITextSearchModes) => void;
+  changeSearchMode: IChangeSeachMode;
 };
 
-export const SearchContextProvider: React.FC = ({ children }) => {
-  const [autoFetchResults, setAutoFetchResults] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [searchOptions, setSearchOptions] = useState<string[]>([]);
-  const [searchText, setSearchText] = useState("");
+export const SearchContext = createContext<ISearchContext>({} as any);
 
-  const fetchSearch = useCallback(
+export const SearchContextProvider: React.FC = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { isMode, changeSearchMode } = useSearchMode();
+  const [searchText, setSearchText] = useState("");
+  const [searchOptions, setSearchOptions] = useState<string[]>([]);
+  const [autoFetchResults, setAutoFetchResults] = useState(true);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchSuggestions, setSearchSuggestions] = useState<any[]>([]);
+
+  const fetchSearchSuggestions = useCallback(
+    debounce(async (searchQuery: string) => {
+      setIsLoading(true);
+      try {
+        setSearchSuggestions(await Api.Trains.searchSuggestions(searchQuery));
+      } catch (_) {
+        setSearchSuggestions([]);
+      }
+      setIsLoading(false);
+    }, 25),
+    []
+  );
+
+  const fetchSearchResults = useCallback(
     debounce(
       async (searchQuery: string, searchOptionsRef: typeof searchOptions) => {
         setIsLoading(true);
@@ -35,7 +50,7 @@ export const SearchContextProvider: React.FC = ({ children }) => {
         try {
           if (searchQuery.trim()) {
             setSearchResults(
-              await searchTrains(searchQuery, {
+              await Api.Trains.searchTrains(searchQuery, {
                 searchFields:
                   searchOptionsRef.length > 0
                     ? (searchOptionsRef as any[])
@@ -52,23 +67,37 @@ export const SearchContextProvider: React.FC = ({ children }) => {
   );
 
   useEffect(() => {
-    if (autoFetchResults) {
+    if (isMode("suggestions") && autoFetchResults) {
       setIsLoading(true);
-      fetchSearch(searchText, searchOptions);
+      fetchSearchSuggestions(searchText);
     }
-  }, [fetchSearch, searchText, searchOptions, autoFetchResults]);
+  }, [isMode, fetchSearchSuggestions, searchText, autoFetchResults]);
+
+  useEffect(() => {
+    if (isMode("results") && autoFetchResults) {
+      setIsLoading(true);
+      fetchSearchResults(searchText, searchOptions);
+    }
+  }, [isMode, fetchSearchResults, searchText, searchOptions, autoFetchResults]);
+
+  const updateSearchText = (newSearchText: string, mode: ITextSearchModes) => {
+    changeSearchMode(mode);
+    setSearchText(newSearchText);
+  };
 
   return (
     <SearchContext.Provider
       value={{
-        autoFetchResults: autoFetchResults,
-        setAutoFetchResults: setAutoFetchResults,
+        isMode,
         isLoading,
         searchText,
         searchOptions,
-        setSearchOptions,
         searchResults,
-        setSearchText,
+        searchSuggestions,
+        changeSearchMode,
+        setSearchOptions,
+        setAutoFetchResults,
+        updateSearchText,
       }}
       children={children}
     />
