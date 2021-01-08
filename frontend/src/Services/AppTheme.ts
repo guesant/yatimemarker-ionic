@@ -6,6 +6,13 @@ export type AppThemeSupportedModes = "light" | "dark";
 const getDarkMatchMedia = () =>
   window.matchMedia("(prefers-color-scheme: dark)");
 
+export const getBrowserTheme = () => {
+  return getDarkMatchMedia().matches ? "dark" : "light";
+};
+
+export const getParsedTheme = (theme: AppThemeSupportedModes | "_auto") =>
+  theme === "_auto" ? getBrowserTheme() : theme;
+
 export class AppTheme {
   static startThemeListener() {
     AppTheme.loadTheme();
@@ -13,16 +20,7 @@ export class AppTheme {
     prefersDark.addEventListener("change", () => AppTheme.loadTheme());
   }
   static async loadTheme() {
-    let themeMode = "light";
     const { theme } = getSettings(store.getState());
-    switch (theme) {
-      case "_auto":
-        themeMode = getDarkMatchMedia().matches ? "dark" : "light";
-        break;
-      default:
-        themeMode = theme;
-        break;
-    }
-    document.body.classList.toggle("dark", themeMode === "dark");
+    document.body.classList.toggle("dark", getParsedTheme(theme) === "dark");
   }
 }
