@@ -1,6 +1,7 @@
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import "@ionic/react/css/core.css";
+import { blue } from "@material-ui/core/colors";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import React, { Suspense } from "react";
 import { Redirect, Route } from "react-router-dom";
@@ -30,6 +31,9 @@ const App: React.FC = () => {
   const muiAppTheme = createMuiTheme({
     palette: {
       type: theme,
+      primary: {
+        main: blue[500],
+      },
     },
   });
 
