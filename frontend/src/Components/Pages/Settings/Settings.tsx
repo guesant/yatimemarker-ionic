@@ -29,6 +29,11 @@ import { useHistory } from "react-router";
 import { setSettings } from "../../../Store/settings/actions/setSettings";
 import { getSettings } from "../../../Store/settings/selectors/getSettings";
 
+const sourceCodeURL = "https://github.com/guesant/ya-time-marker-ionic";
+const licenseURL =
+  "https://github.com/guesant/ya-time-marker-ionic/blob/dev/LICENSE.mit.txt";
+const licenseID = "MIT";
+
 const Settings: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -42,11 +47,11 @@ const Settings: React.FC = () => {
         setSettings(
           produce(settings, (draft: any) => {
             draft.theme = theme;
-          })
-        )
+          }),
+        ),
       );
     },
-    [dispatch, settings]
+    [dispatch, settings],
   );
 
   return (
@@ -82,6 +87,34 @@ const Settings: React.FC = () => {
                 <IonSelectOption value="dark">Escuro</IonSelectOption>
               </IonSelect>
             </IonItem>
+          </IonList>
+          <IonList>
+            <IonListHeader>
+              <IonLabel>Sobre</IonLabel>
+            </IonListHeader>
+            <IonItem button>
+              <IonLabel>
+                <h2>Autor</h2>
+                <p>Gabriel Rodrigues</p>
+              </IonLabel>
+            </IonItem>
+
+            <a href={sourceCodeURL} target="_blank" rel="noopener noreferrer">
+              <IonItem button>
+                <IonLabel>
+                  <h2>Código Fonte</h2>
+                  <p>{sourceCodeURL}</p>
+                </IonLabel>
+              </IonItem>
+            </a>
+            <a href={licenseURL} target="_blank" rel="noopener noreferrer">
+              <IonItem button>
+                <IonLabel>
+                  <h2>Licensa</h2>
+                  <p>{licenseID}</p>
+                </IonLabel>
+              </IonItem>
+            </a>
           </IonList>
         </div>
       </IonContent>
