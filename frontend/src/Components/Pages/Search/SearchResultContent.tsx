@@ -6,17 +6,38 @@
 //endregion
 
 import { IonItem, IonLabel, IonList } from "@ionic/react";
-import React, { Fragment, useContext } from "react";
+import debounce from "lodash.debounce";
+import React, {
+  Fragment,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useHistory } from "react-router";
 import { ROUTE_TRAIN_VIEW } from "../../Routes";
 import { SearchContext } from "./Hooks/SearchContext";
 
-export type SearchResultContentProps = {};
-
-const SearchResultContent: React.FC<SearchResultContentProps> = () => {
+const SearchResultContent: React.FC = () => {
   const history = useHistory();
+  const [noResultsFound, setNoResultsFound] = useState(false);
+  const { searchText, searchResults, isMode, isLoading } = useContext(
+    SearchContext,
+  );
 
-  const { searchText, searchResults, isLoading } = useContext(SearchContext);
+  const verifyHasResults = useCallback(
+    debounce(() => {
+      setNoResultsFound(
+        Boolean(isMode("results") && !isLoading && searchResults.length === 0),
+      );
+    }),
+    [searchResults, isMode, isLoading],
+  );
+
+  useEffect(() => {
+    setNoResultsFound(false);
+    verifyHasResults();
+  }, [searchText, searchResults, isLoading, verifyHasResults]);
 
   return (
     <Fragment>
@@ -37,6 +58,13 @@ const SearchResultContent: React.FC<SearchResultContentProps> = () => {
 
           {searchText && (
             <div>
+              {noResultsFound && (
+                <div className="tw-py-4">
+                  <div className="tw-px-4">
+                    <IonLabel>Nenhum resultado encontrado.</IonLabel>
+                  </div>
+                </div>
+              )}
               {!isLoading && (
                 <>
                   {searchResults.length > 0 && (
@@ -55,13 +83,6 @@ const SearchResultContent: React.FC<SearchResultContentProps> = () => {
                           </Fragment>
                         ))}
                       </IonList>
-                    </div>
-                  )}
-                  {!searchResults.length && (
-                    <div className="tw-py-4">
-                      <div className="tw-px-4">
-                        <IonLabel>Nenhum resultado encontrado.</IonLabel>
-                      </div>
                     </div>
                   )}
                 </>
