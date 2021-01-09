@@ -14,4 +14,13 @@ i18n
     },
   });
 
-i18n.changeLanguage("en");
+i18n.on("languageChanged", (lang) => {
+  localStorage.setItem("i18nextLng", lang);
+});
+
+function loadLocalLanguage() {
+  const localLanguage = localStorage.getItem("i18nextLng") || "en";
+  i18n.changeLanguage(localLanguage);
+}
+
+loadLocalLanguage();
