@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import PouchDB from "pouchdb";
 
 const CAN_PERFORM_INDEXED_DB = "canPerformIndexedDB";

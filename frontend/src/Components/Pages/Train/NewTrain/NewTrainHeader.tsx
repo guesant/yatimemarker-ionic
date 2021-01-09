@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { IonButton, IonButtons } from "@ionic/react";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";

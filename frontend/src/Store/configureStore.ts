@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { AppTheme } from "../Services/AppTheme";
 import settingsReducer from "./settings";

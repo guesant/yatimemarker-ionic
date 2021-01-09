@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { nanoid } from "nanoid";
 import { ITrain } from "../../Interfaces/ITrain";
 import { getDbTrains } from "../../db";

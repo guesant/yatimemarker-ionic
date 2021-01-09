@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { Api } from "@ya-time-marker/lib";
 import debounce from "lodash.debounce";
 import React, { createContext, useCallback, useEffect, useState } from "react";

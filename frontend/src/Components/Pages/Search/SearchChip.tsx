@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { IonChip, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircle } from "ionicons/icons";
 import React from "react";

@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import MiniSearch from "minisearch";
 import { getDbTrains } from "../../../db";
 import { ITrain } from "../../../Interfaces/ITrain";

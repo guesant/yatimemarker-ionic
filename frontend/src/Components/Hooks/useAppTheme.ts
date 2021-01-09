@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ISettingsState } from "../../Interfaces/Settings";

@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { IonItem, IonLabel, IonList } from "@ionic/react";
 import React, { Fragment, useContext } from "react";
 import { useHistory } from "react-router";

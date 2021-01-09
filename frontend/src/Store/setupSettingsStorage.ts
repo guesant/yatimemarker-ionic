@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import localForage from "localforage";
 import { setSettings } from "./settings/actions/setSettings";
 import { getSettings } from "./settings/selectors/getSettings";

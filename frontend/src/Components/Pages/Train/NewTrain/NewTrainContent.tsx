@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import produce from "immer";
 import React, { useContext, useEffect } from "react";
 import CRUDTrainContent from "../CRUD/CRUDTrainContent";

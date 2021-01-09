@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { lazy } from "react";
 
 const Promise_PageHome = import("./Components/Pages/Home/Home");
