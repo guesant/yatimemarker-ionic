@@ -48,10 +48,10 @@ const CRUDTrainContent: React.FC<CRUDTrainContentProps> = ({
           getTrainStep(
             fullMatch
               ? `${txtMatch} ${(counter!.length ? +counter! : 1) + 1}`
-              : "Passo 1"
-          )
+              : "Passo 1",
+          ),
         );
-      })
+      }),
     );
   }
 
@@ -77,7 +77,7 @@ const CRUDTrainContent: React.FC<CRUDTrainContentProps> = ({
     setTrain(
       produce(train, (draft) => {
         draft.steps = draft.steps.filter((_, idx) => idx !== editIndex);
-      })
+      }),
     );
   }
 
@@ -86,7 +86,7 @@ const CRUDTrainContent: React.FC<CRUDTrainContentProps> = ({
     setTrain(
       produce(train, (draft) => {
         draft.steps[editIndex] = updatedStep;
-      })
+      }),
     );
   }
 

@@ -14,7 +14,7 @@ import { store } from "./configureStore";
 export async function setupSettingsStorage() {
   async function loadSettings() {
     const settings = settingsSchema.cast(
-      (await localForage.getItem("settings")) || {}
+      (await localForage.getItem("settings")) || {},
     );
     store.dispatch(setSettings(settings));
   }

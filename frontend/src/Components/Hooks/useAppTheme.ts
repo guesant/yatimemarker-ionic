@@ -16,7 +16,7 @@ import {
 export const useAppTheme = () => {
   const [theme, setThemeType] = useState<AppThemeSupportedModes>("light");
   const stateTheme = useSelector(
-    (state) => ((state as any).settings as ISettingsState).theme
+    (state) => ((state as any).settings as ISettingsState).theme,
   );
 
   useEffect(() => {

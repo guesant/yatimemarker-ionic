@@ -46,7 +46,7 @@ export const SearchContextProvider: React.FC = ({ children }) => {
       }
       setIsLoading(false);
     }, 25),
-    []
+    [],
   );
 
   const fetchSearchResults = useCallback(
@@ -62,15 +62,15 @@ export const SearchContextProvider: React.FC = ({ children }) => {
                   searchOptionsRef.length > 0
                     ? (searchOptionsRef as any[])
                     : ["title", "steps"],
-              })
+              }),
             );
           }
         } catch (_) {}
         setIsLoading(false);
       },
-      250
+      250,
     ),
-    []
+    [],
   );
 
   useEffect(() => {

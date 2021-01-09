@@ -81,14 +81,14 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                   setUpdatedStep(
                     produce(updatedStep, (draft: any) => {
                       draft.meta.description = target.value;
-                    })
+                    }),
                   );
                 }}
                 onBlur={({ target }) => {
                   setUpdatedStep(
                     produce(updatedStep, (draft: any) => {
                       draft.meta.description = target.value.trim();
-                    })
+                    }),
                   );
                 }}
                 fullWidth

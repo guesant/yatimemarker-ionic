@@ -13,7 +13,7 @@ import { ISearchTrainsOptions } from "./ISearchTrainsOptions";
 
 export async function searchTrains(
   searchQuery: string,
-  { searchFields = ["title"] }: ISearchTrainsOptions = {}
+  { searchFields = ["title"] }: ISearchTrainsOptions = {},
 ) {
   const dbTrains = await getDbTrains();
 

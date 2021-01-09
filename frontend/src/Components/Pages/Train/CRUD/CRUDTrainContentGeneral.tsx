@@ -31,7 +31,7 @@ const CRUDTrainContentGeneral: React.FC<CRUDTrainContentGeneralProps> = ({
               setTrain(
                 produce(train, (draft) => {
                   draft.title = target.value;
-                })
+                }),
               );
             }}
             onBlur={({ target }) => {
@@ -39,7 +39,7 @@ const CRUDTrainContentGeneral: React.FC<CRUDTrainContentGeneralProps> = ({
               setTrain(
                 produce(train, (draft) => {
                   draft.title = target.value.trim();
-                })
+                }),
               );
             }}
           />

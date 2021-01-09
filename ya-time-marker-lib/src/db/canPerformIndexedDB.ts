@@ -16,7 +16,7 @@ const getSessionCanPerf = () => {
   if (hasOwnProperty(sessionStorage, CAN_PERFORM_INDEXED_DB)) {
     try {
       return JSON.parse(
-        sessionStorage.getItem(CAN_PERFORM_INDEXED_DB) as string
+        sessionStorage.getItem(CAN_PERFORM_INDEXED_DB) as string,
       );
     } catch (_) {}
   }

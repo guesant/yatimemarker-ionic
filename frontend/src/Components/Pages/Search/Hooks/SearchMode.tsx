@@ -18,12 +18,12 @@ export type IChangeSeachMode = (mode: ITextSearchModes) => void;
 
 export const useSearchMode = () => {
   const [searchMode, setSearchMode] = useState<ISymbolSearchModes>(
-    SEARCH_MODE_SUGGESTIONS
+    SEARCH_MODE_SUGGESTIONS,
   );
 
   const internal__isMode = useCallback(
     (mode: ITextSearchModes) => isMode(searchMode, mode),
-    [searchMode]
+    [searchMode],
   );
 
   const changeSearchMode = (mode: ITextSearchModes) => {

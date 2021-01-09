@@ -12,7 +12,7 @@ import { NewTrainContext } from "./Hooks/NewTrainContext";
 
 export const NewTrainContent = () => {
   const { train, editIndex, setEditIndex, setTrain } = useContext(
-    NewTrainContext
+    NewTrainContext,
   );
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const NewTrainContent = () => {
       setTrain(
         produce(train, (draft) => {
           draft.title = `Treino ${now.toLocaleDateString()}`;
-        })
+        }),
       );
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
