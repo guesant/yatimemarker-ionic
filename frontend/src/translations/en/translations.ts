@@ -21,8 +21,8 @@ export const TRANSLATIONS_EN = {
   settings_apparence_theme_light: "Light",
   settings_apparence_theme_dark: "Dark",
 
-  settings_apparence_about: "About",
-  settings_apparence_about_author: "Author",
-  settings_apparence_about_sourceCode: "Source code",
-  settings_apparence_about_license: "License",
+  settings_about: "About",
+  settings_about_author: "Author",
+  settings_about_sourceCode: "Source code",
+  settings_about_license: "License",
 };

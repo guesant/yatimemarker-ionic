@@ -138,6 +138,7 @@ const Settings: React.FC = () => {
       <IonContent>
         <>
           {previousLanguage !== null &&
+            previousLanguage !== language &&
             (() => {
               const plData = getData(i18n, previousLanguage);
               return (
@@ -146,7 +147,7 @@ const Settings: React.FC = () => {
                   onDidDismiss={() => setToastUndoLanguage(false)}
                   message={plData("language_changed_successfully")}
                   position="bottom"
-                  duration={15000}
+                  duration={25000}
                   buttons={[
                     {
                       text: plData("language_undo"),
@@ -157,6 +158,37 @@ const Settings: React.FC = () => {
               );
             })()}
         </>
+        <div>
+          <IonList>
+            <IonListHeader>
+              <IonLabel>{t("settings_apparence")}</IonLabel>
+            </IonListHeader>
+            <IonItem>
+              <IonLabel>{t("settings_apparence_theme")}</IonLabel>
+              <IonSelect
+                value={theme}
+                okText={t("prompt_ok")}
+                cancelText={t("prompt_close")}
+                onIonChange={(e) => setColorTheme(e.detail.value)}
+                children={
+                  <>
+                    {supportedThemes.map(({ i18nKey, value }) => (
+                      <Fragment
+                        key={value}
+                        children={
+                          <IonSelectOption
+                            value={value}
+                            children={t(i18nKey)}
+                          />
+                        }
+                      />
+                    ))}
+                  </>
+                }
+              />
+            </IonItem>
+          </IonList>
+        </div>
         <div>
           <IonList>
             <IonListHeader>
@@ -187,50 +219,22 @@ const Settings: React.FC = () => {
               />
             </IonItem>
           </IonList>
+        </div>
+        <div>
           <IonList>
             <IonListHeader>
-              <IonLabel>{t("settings_apparence")}</IonLabel>
-            </IonListHeader>
-            <IonItem>
-              <IonLabel>{t("settings_apparence_theme")}</IonLabel>
-              <IonSelect
-                value={theme}
-                okText={t("prompt_ok")}
-                cancelText={t("prompt_close")}
-                onIonChange={(e) => setColorTheme(e.detail.value)}
-                children={
-                  <>
-                    {supportedThemes.map(({ i18nKey, value }) => (
-                      <Fragment
-                        key={value}
-                        children={
-                          <IonSelectOption
-                            value={value}
-                            children={t(i18nKey)}
-                          />
-                        }
-                      />
-                    ))}
-                  </>
-                }
-              />
-            </IonItem>
-          </IonList>
-          <IonList>
-            <IonListHeader>
-              <IonLabel>{t("settings_apparence_about")}</IonLabel>
+              <IonLabel>{t("settings_about")}</IonLabel>
             </IonListHeader>
             <IonItem button>
               <IonLabel>
-                <h2>{t("settings_apparence_about_author")}</h2>
+                <h2>{t("settings_about_author")}</h2>
                 <p>Gabriel Rodrigues</p>
               </IonLabel>
             </IonItem>
-
             <a href={sourceCodeURL} target="_blank" rel="noopener noreferrer">
               <IonItem button>
                 <IonLabel>
-                  <h2>{t("settings_apparence_about_sourceCode")}</h2>
+                  <h2>{t("settings_about_sourceCode")}</h2>
                   <p>{sourceCodeURL}</p>
                 </IonLabel>
               </IonItem>
@@ -238,7 +242,7 @@ const Settings: React.FC = () => {
             <a href={licenseURL} target="_blank" rel="noopener noreferrer">
               <IonItem button>
                 <IonLabel>
-                  <h2>{t("settings_apparence_about_license")}</h2>
+                  <h2>{t("settings_about_license")}</h2>
                   <p>{licenseID}</p>
                 </IonLabel>
               </IonItem>
