@@ -7,15 +7,15 @@
 
 import { ITrain } from "@ya-time-marker/lib";
 import React, { createContext, useState } from "react";
-import { StateSetter } from "../../../../../../types/StateSetter";
+import { IStateSetter } from "../../../../../types/IStateSetter";
 
 export const NewTrainContext = createContext<INewTrainContext>({} as any);
 
 export type INewTrainContext = {
   train: ITrain;
   editIndex: number;
-  setTrain: StateSetter<INewTrainContext["train"]>;
-  setEditIndex: StateSetter<INewTrainContext["editIndex"]>;
+  setTrain: IStateSetter<INewTrainContext["train"]>;
+  setEditIndex: IStateSetter<INewTrainContext["editIndex"]>;
 };
 
 export const NewTrainProvider: React.FC = ({ children }) => {

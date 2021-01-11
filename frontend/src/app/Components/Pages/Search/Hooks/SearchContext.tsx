@@ -8,7 +8,7 @@
 import { Api } from "@ya-time-marker/lib";
 import debounce from "lodash.debounce";
 import React, { createContext, useCallback, useEffect, useState } from "react";
-import { StateSetter } from "../../../../../types/StateSetter";
+import { IStateSetter } from "../../../../types/IStateSetter";
 import { IChangeSeachMode, useSearchMode } from "./SearchMode";
 import { ITextSearchModes } from "./searchModes/SEARCH_MODES";
 
@@ -19,8 +19,8 @@ export type ISearchContext = {
   searchResults: any[];
   searchOptions: string[];
   searchSuggestions: any[];
-  setSearchOptions: StateSetter<ISearchContext["searchOptions"]>;
-  setAutoFetchResults: StateSetter<boolean>;
+  setSearchOptions: IStateSetter<ISearchContext["searchOptions"]>;
+  setAutoFetchResults: IStateSetter<boolean>;
   updateSearchText: (newSearchText: string, mode: ITextSearchModes) => void;
   changeSearchMode: IChangeSeachMode;
 };
