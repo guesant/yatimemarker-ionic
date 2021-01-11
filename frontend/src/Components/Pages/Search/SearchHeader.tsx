@@ -15,13 +15,13 @@ import {
   useIonViewDidEnter,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
-import React, { Fragment, useContext, useRef } from "react";
+import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import { SearchContext } from "./Hooks/SearchContext";
 
 const SearchHeader: React.FC = () => {
   const history = useHistory();
-  const { searchText, updateSearchText } = useContext(SearchContext);
+  const { isMode, searchText, updateSearchText } = useContext(SearchContext);
   const searchInputRef = useRef<HTMLIonInputElement>(null);
 
   useIonViewDidEnter(() => {
@@ -31,6 +31,20 @@ const SearchHeader: React.FC = () => {
       }
     })();
   }, [searchInputRef]);
+
+  useEffect(() => {
+    (async () => {
+      if (searchInputRef.current) {
+        const ionInputElement = searchInputRef.current;
+        if (isMode("suggestions")) {
+          const htmlInputElement = await ionInputElement.getInputElement();
+          if (window.document.activeElement !== htmlInputElement) {
+            await ionInputElement.setFocus();
+          }
+        }
+      }
+    })();
+  }, [isMode, searchText]);
 
   return (
     <Fragment>
