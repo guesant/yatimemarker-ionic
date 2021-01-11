@@ -51,8 +51,14 @@ const Home: React.FC = () => {
   const [trains, setTrains] = useState<ITrain[]>([]);
   const { t } = useTranslation();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function fetchTrains() {
-    setTrains((await getTrains()) as any[]);
+    setIsLoading(true);
+    try {
+      setTrains((await getTrains()) as any[]);
+    } catch (_) {}
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -179,6 +185,20 @@ const Home: React.FC = () => {
               children={<TrainCard train={train} />}
             />
           ))}
+        </div>
+
+        <div>
+          <div className="tw-py-4">
+            <div className="tw-px-4">
+              {!trains.length && !isLoading && (
+                <>
+                  <p>
+                    Adicione um novo treino no botão "<IonIcon icon={add} />"
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </HomeHeaderLayout>
     </IonPage>
