@@ -9,7 +9,8 @@ import { lazy } from "react";
 
 const Promise_PageHome = () => import("./app/Components/Pages/Home/Home");
 const Promise_PageSearch = () => import("./app/Components/Pages/Search/Search");
-const Promise_PageProfile = () => import("./Components/Pages/Profile/Profile");
+const Promise_PageProfile = () =>
+  import("./app/Components/Pages/Profile/Profile");
 const Promise_PageSettings = () =>
   import("./app/Components/Pages/Settings/Settings");
 const Promise_PageNewTrain = () =>
