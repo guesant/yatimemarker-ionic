@@ -8,7 +8,7 @@
 import { Api } from "@ya-time-marker/lib";
 import debounce from "lodash.debounce";
 import React, { createContext, useCallback, useEffect, useState } from "react";
-import { StateSetter } from "../../../../types/StateSetter";
+import { StateSetter } from "../../../../../types/StateSetter";
 import { IChangeSeachMode, useSearchMode } from "./SearchMode";
 import { ITextSearchModes } from "./searchModes/SEARCH_MODES";
 
