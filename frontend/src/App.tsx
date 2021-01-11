@@ -21,7 +21,7 @@ import {
   PageSettings,
 } from "./AppPages";
 import "./Assets/tw-dist.css";
-import { useAppTheme } from "./Components/Hooks/useAppTheme";
+import { useAppTheme } from "./app/Components/Hooks/useAppTheme";
 import LoadingPage from "./Components/LoadingPage";
 import {
   ROUTE_HOME,

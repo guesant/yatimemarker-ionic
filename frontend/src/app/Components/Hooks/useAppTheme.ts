@@ -7,11 +7,11 @@
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ISettingsState } from "../../Interfaces/Settings";
+import { ISettingsState } from "../../../Interfaces/Settings";
 import {
   AppThemeSupportedModes,
   getParsedTheme,
-} from "../../Services/AppTheme";
+} from "../../../Services/AppTheme";
 
 export const useAppTheme = () => {
   const [theme, setThemeType] = useState<AppThemeSupportedModes>("light");
