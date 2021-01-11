@@ -8,6 +8,9 @@
 import {
   IonButton,
   IonButtons,
+  IonFab,
+  IonFabButton,
+  IonFabList,
   IonIcon,
   IonItem,
   IonList,
@@ -18,11 +21,25 @@ import {
   useIonViewWillEnter,
 } from "@ionic/react";
 import { Api, ITrain } from "@ya-time-marker/lib";
-import { ellipsisHorizontal, ellipsisVertical, search } from "ionicons/icons";
+import {
+  add,
+  caretUp,
+  caretUpCircleOutline,
+  ellipsisHorizontal,
+  ellipsisVertical,
+  search,
+} from "ionicons/icons";
 import React, { Fragment, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
-import { ROUTE_SEARCH, ROUTE_SETTINGS, ROUTE_TRAIN_NEW } from "../../Routes";
-import TrainCard from "../../TrainCard";
+import "../../../translations/i18n";
+import {
+  ROUTE_PROFILE,
+  ROUTE_SEARCH,
+  ROUTE_SETTINGS,
+  ROUTE_TRAIN_NEW,
+} from "../../../Components/Routes";
+import TrainCard from "../../../Components/TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
 const {
@@ -32,6 +49,7 @@ const {
 const Home: React.FC = () => {
   const history = useHistory();
   const [trains, setTrains] = useState<ITrain[]>([]);
+  const { t } = useTranslation();
 
   async function fetchTrains() {
     setTrains((await getTrains()) as any[]);
@@ -61,7 +79,7 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <HomeHeaderLayout
-        toolbarTitle="Início"
+        toolbarTitle={t("home_header")}
         toolbarActions={
           <IonButtons slot="end">
             <IonButton
@@ -84,17 +102,36 @@ const Home: React.FC = () => {
           </IonButtons>
         }
       >
-        <IonRefresher
-          slot="fixed"
-          onIonRefresh={async (e) => {
-            try {
-              await fetchTrains();
-            } catch (_) {}
-            (e.target as HTMLIonRefresherElement).complete();
-          }}
-        >
-          <IonRefresherContent />
-        </IonRefresher>
+        <>
+          <IonRefresher
+            slot="fixed"
+            onIonRefresh={async (e) => {
+              try {
+                await fetchTrains();
+              } catch (_) {}
+              (e.target as HTMLIonRefresherElement).complete();
+            }}
+            children={<IonRefresherContent />}
+          />
+        </>
+        <>
+          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonFabButton color="light">
+              <IonIcon md={caretUp} ios={caretUpCircleOutline} />
+            </IonFabButton>
+            <IonFabList side="top">
+              <IonFabButton
+                color="primary"
+                onClick={() => history.push(ROUTE_TRAIN_NEW())}
+                children={
+                  <>
+                    <IonIcon icon={add} />
+                  </>
+                }
+              />
+            </IonFabList>
+          </IonFab>
+        </>
         <>
           <div>
             <IonPopover
@@ -106,7 +143,11 @@ const Home: React.FC = () => {
               <IonList>
                 {([
                   {
-                    text: "Configurações",
+                    text: t("my_profile"),
+                    action: () => history.push(ROUTE_PROFILE()),
+                  },
+                  {
+                    text: t("settings"),
                     action: () => history.push(ROUTE_SETTINGS()),
                   },
                 ] as {
@@ -131,17 +172,6 @@ const Home: React.FC = () => {
             </IonPopover>
           </div>
         </>
-
-        <IonList>
-          <IonItem
-            onClick={() => history.push(ROUTE_TRAIN_NEW())}
-            button
-            detail
-          >
-            Cadastrar Novo Treino
-          </IonItem>
-        </IonList>
-
         <div>
           {trains.map((train, idx) => (
             <Fragment
