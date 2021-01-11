@@ -5,7 +5,7 @@
  */
 //endregion
 
-import { settingsSchema, ISettingsState } from "../../../app/types/Settings";
+import { settingsSchema, ISettingsState } from "../../../types/Settings";
 
 export const getSettings = (state: any) =>
   settingsSchema.cast(state.settings) as ISettingsState;

@@ -6,7 +6,7 @@
 //endregion
 
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { AppTheme } from "../Services/AppTheme";
+import { AppTheme } from "../../Services/AppTheme";
 import settingsReducer from "./settings";
 import { setupSettingsStorage } from "./setupSettingsStorage";
 
