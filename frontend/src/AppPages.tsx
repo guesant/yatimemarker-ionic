@@ -7,14 +7,14 @@
 
 import { lazy } from "react";
 
-const Promise_PageHome = () => import("./app/Components/Pages/Home/Home");
-const Promise_PageSearch = () => import("./app/Components/Pages/Search/Search");
+const Promise_PageHome = () => import("./app/components/Pages/Home/Home");
+const Promise_PageSearch = () => import("./app/components/Pages/Search/Search");
 const Promise_PageProfile = () =>
-  import("./app/Components/Pages/Profile/Profile");
+  import("./app/components/Pages/Profile/Profile");
 const Promise_PageSettings = () =>
-  import("./app/Components/Pages/Settings/Settings");
+  import("./app/components/Pages/Settings/Settings");
 const Promise_PageNewTrain = () =>
-  import("./app/Components/Pages/Train/NewTrain/NewTrain");
+  import("./app/components/Pages/Train/NewTrain/NewTrain");
 
 
 export const PageHome = lazy(Promise_PageHome);

@@ -21,15 +21,15 @@ import {
   PageSettings,
 } from "./AppPages";
 import "./app/assets/tw-dist.css";
-import { useAppTheme } from "./app/Components/Hooks/useAppTheme";
-import LoadingPage from "./app/Components/LoadingPage";
+import { useAppTheme } from "./app/components/Hooks/useAppTheme";
+import LoadingPage from "./app/components/LoadingPage";
 import {
   ROUTE_HOME,
   ROUTE_PROFILE,
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
-} from "./app/Components/Routes";
+} from "./app/components/Routes";
 import "./app/theme/variables.css";
 
 const App: React.FC = () => {
