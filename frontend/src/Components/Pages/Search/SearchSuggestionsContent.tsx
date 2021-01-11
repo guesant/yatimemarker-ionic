@@ -9,32 +9,50 @@ import { IonButton, IonItem, IonLabel, IonList } from "@ionic/react";
 import { SvgIcon } from "@material-ui/core";
 import CallMadeIcon from "@material-ui/icons/CallMade";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { Fragment, useContext } from "react";
+import { compareTextWithSearchSuggestion } from "@ya-time-marker/lib/build/utils/compareSearchSuggestionWithText";
+import React, {
+  Fragment,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { SearchContext } from "./Hooks/SearchContext";
+import { ISuggestionCompared } from "./Hooks/utils/ISuggestionCompared";
+import { addSearchTextToSuggestions } from "./Hooks/utils/addSearchTextToSuggestions";
 
 const SearchSuggestionsList: React.FC = () => {
+  const [suggestionsList, setSuggestionsList] = useState<ISuggestionCompared[]>(
+    [],
+  );
   const { searchText, updateSearchText, searchSuggestions } = useContext(
-    SearchContext
+    SearchContext,
+  );
+  useEffect(() => {
+    setSuggestionsList(
+      addSearchTextToSuggestions(searchText)(searchSuggestions),
+    );
+  }, [searchSuggestions, searchText]);
+
+  const compareSuggestion = useCallback(
+    (searchResult: ISuggestionCompared) =>
+      compareTextWithSearchSuggestion(searchText.trim())(searchResult),
+    [searchText],
   );
 
   return (
     <IonList>
-      {[
-        ...(searchText.trim() ? [{ suggestion: searchText }] : []),
-        ...searchSuggestions,
-      ]
-        .map((i) => ({ ...i, suggestion: i.suggestion.trim().toLowerCase() }))
-        .filter(
-          ({ suggestion }, index, arr) =>
-            arr.findIndex((i) => i.suggestion === suggestion) === index
-        )
-        .map(({ suggestion }) => (
-          <Fragment key={suggestion}>
+      {suggestionsList.map((searchResult, idx) => {
+        const { isEqualsToTheSearchText } = searchResult;
+        const comparedSuggestion = compareSuggestion(searchResult);
+        const suggestionText = comparedSuggestion.map((i) => i.text).join("");
+        return (
+          <Fragment
+            key={isEqualsToTheSearchText ? 0 : [idx, suggestionText].join("-")}
+          >
             <IonItem
               button
-              onClick={() => {
-                updateSearchText(suggestion, "results");
-              }}
+              onClick={() => updateSearchText(suggestionText, "results")}
               detail={false}
             >
               <IonButton
@@ -43,25 +61,42 @@ const SearchSuggestionsList: React.FC = () => {
                 color="dark"
                 children={<SvgIcon component={SearchIcon} />}
               />
-              <IonLabel>{suggestion}</IonLabel>
-              {searchText.trim().toLowerCase() !== suggestion && (
+              <IonLabel>
+                {comparedSuggestion.map(({ text, highlight }, idx) => (
+                  <Fragment key={idx}>
+                    <span
+                      className={
+                        highlight === "match"
+                          ? "tw-font-bold"
+                          : highlight === "alternative"
+                          ? "tw-italic"
+                          : ""
+                      }
+                      children={text}
+                    />
+                  </Fragment>
+                ))}
+              </IonLabel>
+              {!isEqualsToTheSearchText && (
                 <IonButton
                   slot="end"
                   fill="clear"
                   color="dark"
                   onClick={(e) => {
                     e.stopPropagation();
-                    updateSearchText(suggestion, "suggestions");
+                    updateSearchText(suggestionText, "suggestions");
                   }}
                 >
-                  <div className="tw-transform tw--rotate-90">
-                    <SvgIcon component={CallMadeIcon} />
-                  </div>
+                  <div
+                    className="tw-transform tw--rotate-90"
+                    children={<SvgIcon component={CallMadeIcon} />}
+                  />
                 </IonButton>
               )}
             </IonItem>
           </Fragment>
-        ))}
+        );
+      })}
     </IonList>
   );
 };
