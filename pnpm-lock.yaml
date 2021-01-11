@@ -13,6 +13,7 @@ importers:
       "@capacitor/core": 2.4.5
       "@ionic/react": 5.5.2_react-dom@16.14.0+react@16.14.0
       "@ionic/react-router": 5.5.2_7b472bc675d0a65ea26c6db7891fca9d
+      "@loadable/component": 5.14.1_react@16.14.0
       "@material-ui/core": 4.11.2_0481a0a9865629f4d1be264d521276ac
       "@material-ui/icons": 4.11.2_28789a7ba87a87dc2ff0d8d2b694ccf2
       "@reduxjs/toolkit": 1.5.0
@@ -21,6 +22,7 @@ importers:
       "@testing-library/react": 9.5.0_react-dom@16.14.0+react@16.14.0
       "@testing-library/user-event": 8.1.3
       "@types/jest": 24.9.1
+      "@types/loadable__component": 5.13.1
       "@types/lodash.debounce": 4.0.6
       "@types/node": 12.19.11
       "@types/react": 16.14.2
@@ -56,6 +58,7 @@ importers:
       "@capacitor/core": 2.4.5
       "@ionic/react": ^5.0.7
       "@ionic/react-router": ^5.0.7
+      "@loadable/component": ^5.14.1
       "@material-ui/core": ^4.11.2
       "@material-ui/icons": ^4.11.2
       "@reduxjs/toolkit": ^1.5.0
@@ -64,6 +67,7 @@ importers:
       "@testing-library/react": ^9.4.0
       "@testing-library/user-event": ^8.0.3
       "@types/jest": ^24.0.25
+      "@types/loadable__component": ^5.13.1
       "@types/lodash.debounce": ^4.0.6
       "@types/node": ^12.12.24
       "@types/react": ^16.9.17
@@ -3128,6 +3132,19 @@ packages:
       node: ">= 10.14.2"
     resolution:
       integrity: sha512-fC6QCp7Sc5sX6g8Tvbmj4XUTbyrik0akgRy03yjXbQaBWWNWGE7SGtJk98m0N8nzegD/7SggrUlivxo5ax4KWQ==
+  /@loadable/component/5.14.1_react@16.14.0:
+    dependencies:
+      "@babel/runtime": 7.12.5
+      hoist-non-react-statics: 3.3.2
+      react: 16.14.0
+      react-is: 16.13.1
+    dev: false
+    engines:
+      node: ">=8"
+    peerDependencies:
+      react: ">=16.3.0"
+    resolution:
+      integrity: sha512-UQBZfZrp1FLTf8RNhljXNHFNY4QhAA1L2+GOEeABBFre9TD0aFyQh3Sai5QxcOfy+FTbjIfti5iHaNRR7yUzEQ==
   /@material-ui/core/4.11.2_0481a0a9865629f4d1be264d521276ac:
     dependencies:
       "@babel/runtime": 7.12.5
@@ -3607,6 +3624,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
+  /@types/loadable__component/5.13.1:
+    dependencies:
+      "@types/react": 16.14.2
+    dev: false
+    resolution:
+      integrity: sha512-Zb/Qkw3BnlRoFkL6FJwDvhFhOfeotXRCWd7dHdjVLusHZ3dZjKNi3ERngYBt3tffk2NF4roGVKA/oZMA1KdbCg==
   /@types/lodash.debounce/4.0.6:
     dependencies:
       "@types/lodash": 4.14.167

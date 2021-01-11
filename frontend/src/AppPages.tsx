@@ -5,20 +5,41 @@
  */
 //endregion
 
-import { lazy } from "react";
+import loadable from "@loadable/component";
 
-const Promise_PageHome = () => import("./app/components/Pages/Home/Home");
-const Promise_PageSearch = () => import("./app/components/Pages/Search/Search");
-const Promise_PageProfile = () =>
-  import("./app/components/Pages/Profile/Profile");
-const Promise_PageSettings = () =>
-  import("./app/components/Pages/Settings/Settings");
-const Promise_PageNewTrain = () =>
-  import("./app/components/Pages/Train/NewTrain/NewTrain");
+const BASE_PAGES_PATH = "./app/components/Pages";
 
+export const PageHome = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-home" */ `${BASE_PAGES_PATH}/Home/Home.tsx`
+    ),
+);
 
-export const PageHome = lazy(Promise_PageHome);
-export const PageSearch = lazy(Promise_PageSearch);
-export const PageProfile = lazy(Promise_PageProfile);
-export const PageSettings = lazy(Promise_PageSettings);
-export const PageNewTrain = lazy(Promise_PageNewTrain);
+export const PageSearch = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-search" */ `${BASE_PAGES_PATH}/Search/Search.tsx`
+    ),
+);
+
+export const PageProfile = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-profile" */ `${BASE_PAGES_PATH}/Profile/Profile.tsx`
+    ),
+);
+
+export const PageSettings = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-settings" */ `${BASE_PAGES_PATH}/Settings/Settings.tsx`
+    ),
+);
+
+export const PageNewTrain = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-newtrain" */ `${BASE_PAGES_PATH}/Train/NewTrain/NewTrain.tsx`
+    ),
+);
