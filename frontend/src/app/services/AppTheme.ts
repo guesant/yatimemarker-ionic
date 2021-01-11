@@ -5,8 +5,8 @@
  */
 //endregion
 
-import store from "../app/store/configureStore";
-import { getSettings } from "../app/store/settings/selectors/getSettings";
+import store from "../store/configureStore";
+import { getSettings } from "../store/settings/selectors/getSettings";
 
 export type AppThemeSupportedModes = "light" | "dark";
 

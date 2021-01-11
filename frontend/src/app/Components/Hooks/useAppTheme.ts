@@ -11,7 +11,7 @@ import { ISettingsState } from "../../types/Settings";
 import {
   AppThemeSupportedModes,
   getParsedTheme,
-} from "../../../Services/AppTheme";
+} from "../../services/AppTheme";
 
 export const useAppTheme = () => {
   const [theme, setThemeType] = useState<AppThemeSupportedModes>("light");
