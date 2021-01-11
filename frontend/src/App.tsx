@@ -30,7 +30,7 @@ import {
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
 } from "./app/Components/Routes";
-import "./theme/variables.css";
+import "./app/theme/variables.css";
 
 const App: React.FC = () => {
   const [theme] = useAppTheme();
