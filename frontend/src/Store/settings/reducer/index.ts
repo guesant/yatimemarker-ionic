@@ -6,7 +6,7 @@
 //endregion
 
 import { createReducer } from "@reduxjs/toolkit";
-import { settingsSchema } from "../../../Interfaces/Settings";
+import { settingsSchema } from "../../../app/types/Settings";
 import { setSettings } from "../actions/setSettings";
 
 const settingsReducer = createReducer({}, (builder) => {

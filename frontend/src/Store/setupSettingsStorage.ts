@@ -8,7 +8,7 @@
 import localForage from "localforage";
 import { setSettings } from "./settings/actions/setSettings";
 import { getSettings } from "./settings/selectors/getSettings";
-import { settingsSchema } from "../Interfaces/Settings";
+import { settingsSchema } from "../app/types/Settings";
 import { store } from "./configureStore";
 
 export async function setupSettingsStorage() {

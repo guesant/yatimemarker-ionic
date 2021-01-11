@@ -7,7 +7,7 @@
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ISettingsState } from "../../../Interfaces/Settings";
+import { ISettingsState } from "../../types/Settings";
 import {
   AppThemeSupportedModes,
   getParsedTheme,
