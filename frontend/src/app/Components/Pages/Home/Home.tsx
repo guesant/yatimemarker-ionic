@@ -32,14 +32,14 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
-import "../../../translations/i18n";
+import "../../../../translations/i18n";
 import {
   ROUTE_PROFILE,
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
-} from "../../../Components/Routes";
-import TrainCard from "../../../Components/TrainCard";
+} from "../../../../Components/Routes";
+import TrainCard from "../../../../Components/TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
 const {
