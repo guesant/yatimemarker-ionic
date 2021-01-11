@@ -15,7 +15,7 @@ import React, {
   useState,
 } from "react";
 import { useHistory } from "react-router";
-import { ROUTE_TRAIN_VIEW } from "../../../../Components/Routes";
+import { ROUTE_TRAIN_VIEW } from "../../Routes";
 import { SearchContext } from "./Hooks/SearchContext";
 
 const SearchResultContent: React.FC = () => {

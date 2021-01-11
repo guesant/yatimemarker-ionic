@@ -38,7 +38,7 @@ import {
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
-} from "../../../../Components/Routes";
+} from "../../Routes";
 import TrainCard from "../../../../Components/TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 

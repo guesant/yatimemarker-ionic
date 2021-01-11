@@ -29,7 +29,7 @@ import {
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
-} from "./Components/Routes";
+} from "./app/Components/Routes";
 import "./theme/variables.css";
 
 const App: React.FC = () => {
