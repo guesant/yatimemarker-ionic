@@ -5,7 +5,13 @@
  */
 //endregion
 
-import { IonItem, IonLabel, IonList } from "@ionic/react";
+import {
+  IonItem,
+  IonLabel,
+  IonList,
+  IonSegment,
+  IonSegmentButton,
+} from "@ionic/react";
 import debounce from "lodash.debounce";
 import React, {
   Fragment,
@@ -18,12 +24,61 @@ import { useHistory } from "react-router";
 import { ROUTE_TRAIN_VIEW } from "../../Routes";
 import { SearchContext } from "./Hooks/SearchContext";
 
+const OPTION_PAYLOAD_ONLY_TRAIN = ["title"];
+const OPTION_PAYLOAD_ONLY_STEPS = ["steps"];
+const OPTION_PAYLOAD_BOTH_TRAIN_STEPS = ["title", "steps"];
+
+const SEGMENT_OPTIONS = [
+  {
+    value: "title",
+    children: "Treinos",
+    payload: OPTION_PAYLOAD_ONLY_TRAIN,
+  },
+  {
+    value: "steps",
+    children: "Passos",
+    payload: OPTION_PAYLOAD_ONLY_STEPS,
+  },
+  {
+    value: "both",
+    children: "Treinos & Passos",
+    payload: OPTION_PAYLOAD_BOTH_TRAIN_STEPS,
+  },
+];
+
+const isOptionSelected = (selectedOption: string[]) => (option: string[]) =>
+  selectedOption.length === option.length &&
+  option.every((i) => selectedOption.includes(i));
+
 const SearchResultContent: React.FC = () => {
   const history = useHistory();
   const [hasFoundResults, setHasFoundResults] = useState(true);
-  const { searchText, searchResults, isMode, isLoading } = useContext(
-    SearchContext,
-  );
+  const {
+    searchOptions,
+    setSearchOptions,
+    searchText,
+    searchResults,
+    isMode,
+    isLoading,
+  } = useContext(SearchContext);
+  const [selectedSegment, setSelectedSegment] = useState<
+    "title" | "steps" | "both" | null
+  >(null);
+
+  useEffect(() => {
+    if (searchOptions.length === 0) {
+      setSearchOptions(["title"]);
+    }
+  }, [searchOptions, setSearchOptions]);
+
+  useEffect(() => {
+    const target = SEGMENT_OPTIONS.find(({ payload }) =>
+      isOptionSelected(searchOptions)(payload!),
+    );
+    if (target && target.value !== selectedSegment) {
+      setSelectedSegment(target.value as any);
+    }
+  }, [searchOptions, selectedSegment]);
 
   const verifyHasFoundResults = useCallback(
     debounce(() => {
@@ -47,6 +102,27 @@ const SearchResultContent: React.FC = () => {
           style={{ height: "1px" }}
           className="tw-w-full tw-bg-black tw-bg-opacity-10"
         />
+        <IonSegment
+          scrollable
+          value={selectedSegment}
+          onIonChange={(e) => {
+            const value = e.detail.value;
+            const targetSegment = SEGMENT_OPTIONS.find(
+              (i) => i.value === value,
+            );
+            if (targetSegment) {
+              const { payload } = targetSegment;
+              !isOptionSelected(searchOptions)(payload) &&
+                setSearchOptions(targetSegment.payload);
+            }
+          }}
+        >
+          {SEGMENT_OPTIONS.map(({ value, children }) => (
+            <Fragment key={value}>
+              <IonSegmentButton value={value}>{children}</IonSegmentButton>
+            </Fragment>
+          ))}
+        </IonSegment>
 
         <div>
           {!hasFoundResults && (
