@@ -11,7 +11,7 @@ const Promise_PageHome = () => import("./app/Components/Pages/Home");
 const Promise_PageSearch = () => import("./Components/Pages/Search/Search");
 const Promise_PageProfile = () => import("./Components/Pages/Profile/Profile");
 const Promise_PageSettings = () =>
-  import("./Components/Pages/Settings/Settings");
+  import("./app/Components/Pages/Settings/Settings");
 const Promise_PageNewTrain = () =>
   import("./Components/Pages/Train/NewTrain/NewTrain");
 

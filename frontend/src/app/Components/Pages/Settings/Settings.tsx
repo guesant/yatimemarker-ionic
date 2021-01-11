@@ -28,9 +28,9 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { setSettings } from "../../../Store/settings/actions/setSettings";
-import { getSettings } from "../../../Store/settings/selectors/getSettings";
-import "../../../translations/i18n";
+import { setSettings } from "../../../../Store/settings/actions/setSettings";
+import { getSettings } from "../../../../Store/settings/selectors/getSettings";
+import "../../../../translations/i18n";
 
 const sourceCodeURL = "https://github.com/guesant/ya-time-marker-ionic";
 const licenseURL =
@@ -84,7 +84,7 @@ const useAppTheme = () => {
 };
 
 const getData = (i18n: any, lang: string) => (key: string) => {
-  return i18n.getDataByLanguage(lang)!.translation[key];
+  return (i18n.getDataByLanguage(lang)?.translation || {})[key] ?? "";
 };
 
 const Settings: React.FC = () => {
@@ -138,23 +138,31 @@ const Settings: React.FC = () => {
       <IonContent>
         <>
           {previousLanguage !== null &&
-            previousLanguage !== language &&
             (() => {
               const plData = getData(i18n, previousLanguage);
+              const isToastOpen =
+                showToastUndoLanguage &&
+                previousLanguage !== language &&
+                previousLanguage !== null;
+
               return (
-                <IonToast
-                  isOpen={showToastUndoLanguage}
-                  onDidDismiss={() => setToastUndoLanguage(false)}
-                  message={plData("language_changed_successfully")}
-                  position="bottom"
-                  duration={25000}
-                  buttons={[
-                    {
-                      text: plData("language_undo"),
-                      handler: () => undoToTheLastLanguage(),
-                    },
-                  ]}
-                />
+                <>
+                  {isToastOpen && (
+                    <IonToast
+                      isOpen={isToastOpen}
+                      onDidDismiss={() => setToastUndoLanguage(false)}
+                      message={plData("language_changed_successfully")}
+                      position="bottom"
+                      duration={25000}
+                      buttons={[
+                        {
+                          text: plData("language_undo"),
+                          handler: () => undoToTheLastLanguage(),
+                        },
+                      ]}
+                    />
+                  )}
+                </>
               );
             })()}
         </>
