@@ -7,7 +7,7 @@
 
 import { ITrain } from "@ya-time-marker/lib";
 import React, { createContext, useState } from "react";
-import { StateSetter } from "../../../../../types/StateSetter";
+import { StateSetter } from "../../../../../../types/StateSetter";
 
 export const NewTrainContext = createContext<INewTrainContext>({} as any);
 

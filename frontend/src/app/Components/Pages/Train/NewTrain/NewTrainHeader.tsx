@@ -12,7 +12,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import { addTrain } from "@ya-time-marker/lib/build/Api/Trains/addTrain";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { ROUTE_HOME } from "../../../Routes";
+import { ROUTE_HOME } from "../../../../../Components/Routes";
 import CRUDTrainHeader from "../CRUD/CRUDTrainHeader";
 import { NewTrainContext } from "./Hooks/NewTrainContext";
 

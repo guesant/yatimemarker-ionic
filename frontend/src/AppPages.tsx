@@ -14,7 +14,7 @@ const Promise_PageProfile = () =>
 const Promise_PageSettings = () =>
   import("./app/Components/Pages/Settings/Settings");
 const Promise_PageNewTrain = () =>
-  import("./Components/Pages/Train/NewTrain/NewTrain");
+  import("./app/Components/Pages/Train/NewTrain/NewTrain");
 
 
 export const PageHome = lazy(Promise_PageHome);
