@@ -20,24 +20,25 @@ import { SearchContext } from "./Hooks/SearchContext";
 
 const SearchResultContent: React.FC = () => {
   const history = useHistory();
-  const [noResultsFound, setNoResultsFound] = useState(false);
+  const [hasFoundResults, setHasFoundResults] = useState(true);
   const { searchText, searchResults, isMode, isLoading } = useContext(
     SearchContext,
   );
 
-  const verifyHasResults = useCallback(
+  const verifyHasFoundResults = useCallback(
     debounce(() => {
-      setNoResultsFound(
-        Boolean(isMode("results") && !isLoading && searchResults.length === 0),
-      );
-    }),
+      setHasFoundResults(true);
+      if (!isLoading && isMode("results")) {
+        setHasFoundResults(searchResults.length > 0);
+      }
+    }, 750),
     [searchResults, isMode, isLoading],
   );
 
   useEffect(() => {
-    setNoResultsFound(false);
-    verifyHasResults();
-  }, [searchText, searchResults, isLoading, verifyHasResults]);
+    setHasFoundResults(true);
+    verifyHasFoundResults();
+  }, [searchText, searchResults, isLoading, verifyHasFoundResults]);
 
   return (
     <Fragment>
@@ -48,44 +49,33 @@ const SearchResultContent: React.FC = () => {
         />
 
         <div>
-          {!searchText && !isLoading && (
+          {!hasFoundResults && (
             <div className="tw-py-4">
               <div className="tw-px-4">
-                <IonLabel>Insira um termo de busca.</IonLabel>
+                <IonLabel>Nenhum resultado encontrado.</IonLabel>
               </div>
             </div>
           )}
 
-          {searchText && (
+          {searchText && !isLoading && (
             <div>
-              {noResultsFound && (
-                <div className="tw-py-4">
-                  <div className="tw-px-4">
-                    <IonLabel>Nenhum resultado encontrado.</IonLabel>
-                  </div>
+              {searchResults.length > 0 && (
+                <div className="tw-py-1">
+                  <IonList className="tw-py-0">
+                    {searchResults.map(({ title, id }, idx) => (
+                      <Fragment key={idx}>
+                        <IonItem
+                          button
+                          onClick={() => {
+                            history.push(ROUTE_TRAIN_VIEW({ id }));
+                          }}
+                        >
+                          <IonLabel>{title}</IonLabel>
+                        </IonItem>
+                      </Fragment>
+                    ))}
+                  </IonList>
                 </div>
-              )}
-              {!isLoading && (
-                <>
-                  {searchResults.length > 0 && (
-                    <div className="tw-py-1">
-                      <IonList className="tw-py-0">
-                        {searchResults.map(({ title, id }, idx) => (
-                          <Fragment key={idx}>
-                            <IonItem
-                              button
-                              onClick={() => {
-                                history.push(ROUTE_TRAIN_VIEW({ id }));
-                              }}
-                            >
-                              <IonLabel>{title}</IonLabel>
-                            </IonItem>
-                          </Fragment>
-                        ))}
-                      </IonList>
-                    </div>
-                  )}
-                </>
               )}
             </div>
           )}
