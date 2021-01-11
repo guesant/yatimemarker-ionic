@@ -20,7 +20,7 @@ import {
   PageSearch,
   PageSettings,
 } from "./AppPages";
-import "./Assets/tw-dist.css";
+import "./app/assets/tw-dist.css";
 import { useAppTheme } from "./app/Components/Hooks/useAppTheme";
 import LoadingPage from "./app/Components/LoadingPage";
 import {
