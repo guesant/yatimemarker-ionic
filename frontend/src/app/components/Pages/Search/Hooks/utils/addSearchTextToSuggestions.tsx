@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { ISuggestion } from "@ya-time-marker/lib/build/types/ISuggestionResult";
 import { ISuggestionCompared } from "./ISuggestionCompared";
 import { clearSuggestionText } from "./clearSuggestionText";
