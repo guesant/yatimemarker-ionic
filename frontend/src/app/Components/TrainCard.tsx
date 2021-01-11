@@ -5,11 +5,7 @@
  */
 //endregion
 
-import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-} from "@ionic/react";
+import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/react";
 import { ITrain } from "@ya-time-marker/lib";
 import React from "react";
 

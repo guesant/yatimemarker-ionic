@@ -39,7 +39,7 @@ import {
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
 } from "../../Routes";
-import TrainCard from "../../../../Components/TrainCard";
+import TrainCard from "../../TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
 const {
