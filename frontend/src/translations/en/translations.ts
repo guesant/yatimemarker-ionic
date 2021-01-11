@@ -1,4 +1,8 @@
 export const TRANSLATIONS_EN = {
+  // Loading
+  loading: "Loading...",
+  loading_header: "Loading...",
+
   language_undo: "Undo",
   language_changed_successfully: "Language changed successfully.",
 

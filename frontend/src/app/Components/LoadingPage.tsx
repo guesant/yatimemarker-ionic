@@ -13,18 +13,21 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React from "react";
+import { useTranslation } from "react-i18next";
+import "../../translations/i18n";
 
 const LoadingPage: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <IonPage>
       <IonHeader className="tw-sr-only">
         <IonToolbar>
-          <IonTitle>Carregando...</IonTitle>
+          <IonTitle>{t("loading")}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <div className="tw-px-4 tw-py-4">
-          <p>Carregando...</p>
+          <p>{t("loading")}</p>
         </div>
       </IonContent>
     </IonPage>

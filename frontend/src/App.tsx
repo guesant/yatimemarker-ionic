@@ -22,7 +22,7 @@ import {
 } from "./AppPages";
 import "./Assets/tw-dist.css";
 import { useAppTheme } from "./app/Components/Hooks/useAppTheme";
-import LoadingPage from "./Components/LoadingPage";
+import LoadingPage from "./app/Components/LoadingPage";
 import {
   ROUTE_HOME,
   ROUTE_PROFILE,
