@@ -6,7 +6,7 @@
 //endregion
 
 import { nanoid } from "nanoid";
-import { ITrain } from "../../Interfaces/ITrain";
+import { ITrain } from "../../types/ITrain";
 import { getDbTrains } from "../../db";
 
 export async function addTrain(train: ITrain) {

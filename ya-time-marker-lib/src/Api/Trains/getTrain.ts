@@ -5,7 +5,7 @@
  */
 //endregion
 
-import { ITrain } from "../../Interfaces/ITrain";
+import { ITrain } from "../../types/ITrain";
 import { getDbTrains } from "../../db";
 
 export async function getTrain(id: string) {

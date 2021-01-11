@@ -5,24 +5,18 @@
  */
 //endregion
 
-import { ITrainStep } from "@ya-time-marker/lib";
 import produce from "immer";
 import React, { useEffect, useState } from "react";
 import CRUDTrainContentGeneral from "./CRUDTrainContentGeneral";
 import CRUDTrainContentSteps from "./CRUDTrainContentSteps";
 import CRUDTrainContentStepsEditStep from "./CRUDTrainContentStepsEditStep";
 import { CRUDTrainProps } from "./CRUDTrainProps";
-
-export const getTrainStep = (description = "Passo"): ITrainStep => {
-  return { meta: { description }, duration: { type: "ref", payload: "train" } };
-};
+import { getTrainStep } from "./getTrainStep";
 
 export type CRUDTrainContentProps = CRUDTrainProps & {
   editIndex: number;
   setEditIndex: any;
 };
-
-const newStepRegExp = /^(Passo) ?(\d*)$/;
 
 const CRUDTrainContent: React.FC<CRUDTrainContentProps> = ({
   children,
@@ -35,22 +29,9 @@ const CRUDTrainContent: React.FC<CRUDTrainContentProps> = ({
 
   function newStep() {
     if (!isEditMode) return;
-    const { meta: { description = "" } = {} } =
-      train.steps[train.steps.length - 1] || {};
-    const [fullMatch, txtMatch, counter] = description.match(newStepRegExp) || [
-      null,
-      "",
-      "0",
-    ];
     setTrain(
       produce(train, (draft) => {
-        draft.steps.push(
-          getTrainStep(
-            fullMatch
-              ? `${txtMatch} ${(counter!.length ? +counter! : 1) + 1}`
-              : "Passo 1",
-          ),
-        );
+        draft.steps.push(getTrainStep(`Passo ${draft.steps.length + 1}`));
       }),
     );
   }

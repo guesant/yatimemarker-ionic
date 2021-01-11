@@ -24,9 +24,7 @@ const CRUDTrainContentStepsAddStep: React.FC<CRUDTrainContentStepsAddStepProps> 
           expand="block"
           color="primary"
           style={{ textTransform: "initial" }}
-          onClick={() => {
-            newStep();
-          }}
+          onClick={() => newStep()}
           children="+ Acrescentar Passo"
         />
       )}

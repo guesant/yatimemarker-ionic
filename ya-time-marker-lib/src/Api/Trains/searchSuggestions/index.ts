@@ -7,7 +7,7 @@
 
 import MiniSearch from "minisearch";
 import { getDbTrains } from "../../../db";
-import { ITrain } from "../../../Interfaces/ITrain";
+import { ITrain } from "../../../types/ITrain";
 import { extractField } from "../searchTrains/extractField";
 
 export async function searchSuggestions(searchQuery: string) {
