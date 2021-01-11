@@ -140,7 +140,7 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                 children={
                   <>
                     <IonSelectOption value="duration" children="Tempo" />
-                    <IonSelectOption value="text" children="Texto" />
+                    <IonSelectOption value="text" children="Descrição" />
                   </>
                 }
               />
@@ -149,22 +149,31 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
             {updatedStep.type === "duration" && (
               <>
                 <IonItem>
-                  <IonLabel>Tempo</IonLabel>
+                  <IonLabel>Duração</IonLabel>
                   <IonSelect
-                    value={updatedStep.payload.type}
+                    value={(() => {
+                      const { type, payload } = updatedStep.payload;
+                      if (type === "ref") {
+                        return [type, payload].join("_");
+                      }
+                      return type;
+                    })()}
                     okText={t("prompt_ok")}
                     cancelText={t("prompt_close")}
                     onIonChange={(e) => {
                       setUpdatedStep(
                         produce(updatedStep, (draft) => {
-                          const type = e.detail.value;
+                          const type = String(e.detail.value);
+                          if (type.match(/^ref_?/)) {
+                            draft.payload = {
+                              type: "ref",
+                              payload:
+                                (type.replace("ref_", "") as any) || "train",
+                            };
+                            return;
+                          }
+
                           switch (type) {
-                            case "ref":
-                              draft.payload = {
-                                type: "ref",
-                                payload: "train",
-                              };
-                              break;
                             case "template":
                               draft.payload = {
                                 type: "template",
@@ -177,38 +186,24 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                     }}
                     children={
                       <>
-                        <IonSelectOption value="ref" children="Referência" />
                         <IonSelectOption
                           value="template"
                           children="Tempo Customizado"
+                        />{" "}
+                        <IonSelectOption
+                          disabled
+                          value="ref"
+                          children="Referência"
+                        />
+                        <IonSelectOption
+                          value="ref_train"
+                          children="Referência: Treino"
                         />
                       </>
                     }
                   />
                 </IonItem>
-                {updatedStep.payload.type === "ref" && (
-                  <IonItem>
-                    <IonLabel>Referência</IonLabel>
-                    <IonSelect
-                      value={updatedStep.payload.payload}
-                      okText={t("prompt_ok")}
-                      cancelText={t("prompt_close")}
-                      onIonChange={(e) => {
-                        setUpdatedStep(
-                          produce(updatedStep, (draft) => {
-                            const type = e.detail.value;
-                            draft.payload.payload = type;
-                          }),
-                        );
-                      }}
-                      children={
-                        <>
-                          <IonSelectOption value="train" children="Treino" />
-                        </>
-                      }
-                    />
-                  </IonItem>
-                )}
+
                 {updatedStep.payload.type === "template" && (
                   <div style={{ padding: "1rem 1rem" }}>
                     <TextField
@@ -222,7 +217,7 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                       }}
                       fullWidth
                       multiline
-                      label="Template"
+                      label="Tempo Customizado"
                       variant="outlined"
                     />
                   </div>
@@ -245,28 +240,21 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                       }}
                       fullWidth
                       multiline
-                      label="Texto do Treino"
+                      label="Descrição do Treino"
+                      placeholder="10 flexões"
                       variant="outlined"
                     />
+                    <div className="tw-mt-4 tw-text-sm">
+                      <IonLabel>
+                        Utilize esse modo para descrever um treino que não
+                        dependa de duração.
+                      </IonLabel>
+                    </div>
                   </div>
                 )}
               </>
             )}
           </IonList>
-
-          {updatedStep.type === "duration" &&
-            updatedStep.payload.type === "template" && (
-              <div className="tw-py-4">
-                <div className="tw-px-4">
-                  <p className="tw-select-none tw-text-right">
-                    Feito em Ji-Paraná - RO{" "}
-                    <span role="img" aria-label="Brasil">
-                      🇧🇷
-                    </span>
-                  </p>
-                </div>
-              </div>
-            )}
         </IonContent>
       </IonModal>
     </>
