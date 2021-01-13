@@ -29,6 +29,7 @@ import {
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
+  ROUTE_TRAIN_VIEW,
 } from "./app/components/Routes";
 import "./app/theme/variables.css";
 
@@ -64,6 +65,10 @@ const App: React.FC = () => {
                   exact={true}
                 />
                 <Route
+                  path={ROUTE_TRAIN_VIEW()}
+                  component={PageViewTrain}
+                  exact={true}
+                />
                   path={ROUTE_TRAIN_NEW()}
                   component={PageNewTrain}
                   exact={true}

@@ -15,6 +15,9 @@ export function buildRoutes(config: RutyConfig = {}) {
   const ROUTE_PROFILE = route("profile").build();
   const ROUTE_SETTINGS = route("settings").build();
   const ROUTE_TRAIN_NEW = route("trains/new").build();
+  const ROUTE_TRAIN_VIEW = route("train/:id/overview").build<{
+    id: string;
+  }>();
 
   return {
     ROUTE_HOME,
@@ -22,6 +25,7 @@ export function buildRoutes(config: RutyConfig = {}) {
     ROUTE_PROFILE,
     ROUTE_SETTINGS,
     ROUTE_TRAIN_NEW,
+    ROUTE_TRAIN_VIEW,
   };
 }
 
@@ -31,4 +35,5 @@ export const {
   ROUTE_PROFILE,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
+  ROUTE_TRAIN_VIEW,
 } = buildRoutes({ prefix: "/" });

@@ -43,3 +43,11 @@ export const PageNewTrain = loadable(
       /* webpackChunkName: "page-newtrain" */ `${BASE_PAGES_PATH}/Train/NewTrain/NewTrain.tsx`
     ),
 );
+
+export const PageViewTrain = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-viewtrain" */ `${BASE_PAGES_PATH}/Train/ViewTrain/ViewTrain.tsx`
+    ),
+);
+
