@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";

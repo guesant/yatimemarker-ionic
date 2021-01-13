@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import { useCallback, useState } from "react";
 
 export const useFetch = <IData = any, IError = any>() => {
