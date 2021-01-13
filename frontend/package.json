@@ -43,6 +43,7 @@
     "redux": "^4.0.5",
     "ruty": "^1.2.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "tiny-timer": "^1.5.1",
     "typescript": "3.8.3",
     "yup": "^0.32.8"
   },
@@ -53,7 +54,7 @@
     "css:prod": "NODE_ENV=production npx tailwindcss build ./src/app/assets/tailwind.css -o ./src/app/assets/tw-dist.css",
     "start": "npm run css:dev && react-scripts start",
     "build": "npm run css:prod && react-scripts build",
-    "test": "react-scripts test",
+    "test": "tsc --noEmit && react-scripts test",
     "eject": "react-scripts eject",
     "ionic:serve:before": "npm run css:dev",
     "ionic:build:before": "npm run css:prod"

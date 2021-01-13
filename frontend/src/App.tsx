@@ -19,6 +19,8 @@ import {
   PageProfile,
   PageSearch,
   PageSettings,
+  PageStartTrain,
+  PageViewTrain,
 } from "./AppPages";
 import "./app/assets/tw-dist.css";
 import { useAppTheme } from "./app/components/Hooks/useAppTheme";
@@ -29,6 +31,7 @@ import {
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
+  ROUTE_TRAIN_START,
   ROUTE_TRAIN_VIEW,
 } from "./app/components/Routes";
 import "./app/theme/variables.css";
@@ -69,6 +72,12 @@ const App: React.FC = () => {
                   component={PageViewTrain}
                   exact={true}
                 />
+                <Route
+                  path={ROUTE_TRAIN_START()}
+                  component={PageStartTrain}
+                  exact={true}
+                />
+                <Route
                   path={ROUTE_TRAIN_NEW()}
                   component={PageNewTrain}
                   exact={true}

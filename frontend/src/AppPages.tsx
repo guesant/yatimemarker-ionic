@@ -51,3 +51,9 @@ export const PageViewTrain = loadable(
     ),
 );
 
+export const PageStartTrain = loadable(
+  () =>
+    import(
+      /* webpackChunkName: "page-starttrain" */ `${BASE_PAGES_PATH}/Train/StartTrain/StartTrain.tsx`
+    ),
+);
