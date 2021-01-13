@@ -193,7 +193,8 @@ const Home: React.FC = () => {
               {!trains.length && !isLoading && (
                 <>
                   <p>
-                    Adicione um novo treino no botão "<IonIcon icon={add} />"
+                    Adicione um novo treino no botão "<IonIcon icon={add} />
+                    ".
                   </p>
                 </>
               )}
