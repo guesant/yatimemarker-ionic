@@ -5,7 +5,7 @@
  */
 //endregion
 
-import { ITrainOptions } from "./ITrainOptions";
+import { ITrainContext } from "./ITrainContext";
 import { ITrainStepMeta } from "./ITrainStepMeta";
 
 export type ITrainStepCore<Meta = ITrainStepMeta> = {
@@ -20,7 +20,7 @@ export type ITrainStepInfo<Meta = ITrainStepMeta> = ITrainStepCore<Meta> & {
 export type ITrainStepDuration<Meta = ITrainStepMeta> = ITrainStepCore<Meta> & {
   type: "duration";
   payload:
-    | { type: "ref"; payload: keyof ITrainOptions["duration"] }
+    | { type: "ref"; payload: keyof ITrainContext["duration"] }
     | { type: "template"; payload: string };
 };
 

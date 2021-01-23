@@ -6,6 +6,6 @@
 //endregion
 
 export * from "./ITrain";
-export * from "./ITrainOptions";
+export * from "./ITrainContext";
 export * from "./ITrainStep";
 export * from "./ITrainStepMeta";

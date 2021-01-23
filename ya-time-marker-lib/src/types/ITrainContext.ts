@@ -5,8 +5,10 @@
  */
 //endregion
 
-export type ITrainOptions = {
+export type ITrainContext = {
   duration: {
     train: number;
+    interval: number;
+    startCountdown: number;
   };
 };
