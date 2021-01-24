@@ -6,10 +6,11 @@
 //endregion
 
 import {
-  IonAlert,
   IonButton,
   IonButtons,
   IonContent,
+  IonFab,
+  IonFabButton,
   IonHeader,
   IonIcon,
   IonLabel,
@@ -21,17 +22,18 @@ import {
 } from "@ionic/react";
 import { CircularProgress } from "@material-ui/core";
 import { ITrain } from "@ya-time-marker/lib";
+import { computeStepDuration } from "@ya-time-marker/lib/build/utils/computeStepDuration";
 import {
-  arrowBack,
+  checkmark,
+  close,
   pause,
   play,
   playSkipBack,
   playSkipForward,
 } from "ionicons/icons";
 import React, { useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import { useTimer } from "./useTimer";
 import styles from "./StartTrainRunner.module.css";
+import { useTimer } from "./useTimer";
 
 export type IMode = "interval" | "train" | "initialCountdown";
 
@@ -65,7 +67,6 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
   train: { steps },
   onTrainEnd,
 }) => {
-  const history = useHistory();
   const [appTimer] = useTimer();
   const [time, setTime] = useState(0);
   const [status, setStatus] = useState("");
@@ -82,7 +83,17 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
           appTimer.start(intervalDuration);
           break;
         case "train":
-          appTimer.start(trainDuration);
+          const step = steps[(currentTimerStep - 1) / 2];
+          if (step) {
+            const duration = computeStepDuration({
+              duration: {
+                interval: intervalDuration,
+                startCountdown: countdownDuration,
+                train: trainDuration,
+              },
+            })(step);
+            appTimer.start(duration);
+          }
           break;
       }
     }
@@ -91,6 +102,7 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
     currentTimerStep,
     countdownDuration,
     intervalDuration,
+    steps,
     trainDuration,
   ]);
 
@@ -126,15 +138,17 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
     setCurrentTimerStep(nextStep);
   }, [currentTimerStep]);
 
-  const handleDone = useCallback(() => {
-    const nextStep = currentTimerStep + 1;
-    setCurrentTimerStep(nextStep);
-
-    if (nextStep > steps.length * 2 - 1) {
+  useEffect(() => {
+    if (currentTimerStep > steps.length * 2 - 1) {
       onTrainEnd();
       return;
     }
   }, [currentTimerStep, onTrainEnd, steps.length]);
+
+  const handleDone = useCallback(() => {
+    const nextStep = currentTimerStep + 1;
+    setCurrentTimerStep(nextStep);
+  }, [currentTimerStep]);
 
   const handleTick = useCallback(() => {
     setTime(appTimer.time);
@@ -172,181 +186,172 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
     setCurrentTimerStep(-1);
   });
 
-  const [showLeftAlertConfirm, setShowLeftAlertConfirm] = useState(false);
-
   return (
-    <div>
+    <>
       <>
-        <div>
-          <IonModal
-            cssClass={styles.modalClass}
-            isOpen={status === "paused"}
-            backdropDismiss={false}
-            onDidDismiss={() => appTimer.resume()}
-          >
-            <IonHeader>
-              <IonToolbar>
-                <>
-                  <IonButtons slot="start">
-                    <IonButton onClick={() => setShowLeftAlertConfirm(true)}>
-                      <IonIcon icon={arrowBack} />
+        {time === Infinity && (
+          <>
+            <IonFab vertical="bottom" horizontal="end" slot="fixed">
+              <IonFabButton
+                color="primary"
+                onClick={() => {
+                  nextTrainStep();
+                }}
+                children={<IonIcon icon={checkmark} />}
+              />
+            </IonFab>
+          </>
+        )}
+      </>
+      <div>
+        <>
+          <div>
+            <IonModal
+              cssClass={styles.modalClass}
+              isOpen={status === "paused"}
+              backdropDismiss={false}
+              onDidDismiss={() => appTimer.resume()}
+            >
+              <IonHeader>
+                <IonToolbar>
+                  <IonTitle>Pausa</IonTitle>
+                  <IonButtons slot="end">
+                    <IonButton onClick={() => appTimer.resume()}>
+                      <IonIcon icon={close} />
                     </IonButton>
                   </IonButtons>
-                  <IonAlert
-                    isOpen={showLeftAlertConfirm}
-                    onDidDismiss={() => setShowLeftAlertConfirm(false)}
-                    header={"Left Train"}
-                    message={
-                      "Você tem certeza de que deseja sair deste treino?"
-                    }
-                    buttons={[
-                      {
-                        text: "Sim",
-                        cssClass: "secondary",
-                        handler: () => {
-                          history.go(-1);
-                        },
-                      },
-                      {
-                        text: "Não",
-                        role: "cancel",
-                        handler: () => {},
-                      },
-                    ]}
-                  />
-                </>
-                <IonTitle>Pausa</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent>
-              <div className="tw-h-full">
-                <div className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-h-full">
-                  <IonLabel
-                    className="tw-text-3xl tw-font-bold tw-mb-2"
-                    style={{ color: "var(--ion-text-color)" }}
-                  >
-                    Pausa
-                  </IonLabel>
-                  <div>
-                    <IonButton
-                      size="large"
-                      fill="clear"
-                      onClick={() => prevTrainStep()}
+                </IonToolbar>
+              </IonHeader>
+              <IonContent>
+                <div className="tw-h-full">
+                  <div className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-h-full">
+                    <IonLabel
+                      className="tw-text-3xl tw-font-bold tw-mb-2"
+                      style={{ color: "var(--ion-text-color)" }}
                     >
-                      <IonIcon icon={playSkipBack} />
-                    </IonButton>
-
-                    <IonButton
-                      size="large"
-                      fill="clear"
-                      onClick={() => appTimer.resume()}
-                    >
-                      <IonIcon icon={status === "paused" ? play : pause} />
-                    </IonButton>
-                    <IonButton
-                      size="large"
-                      fill="clear"
-                      onClick={() => nextTrainStep()}
-                    >
-                      <IonIcon icon={playSkipForward} />
-                    </IonButton>
+                      Pausa
+                    </IonLabel>
+                    <div>
+                      <IonButton
+                        size="large"
+                        fill="clear"
+                        onClick={() => prevTrainStep()}
+                      >
+                        <IonIcon icon={playSkipBack} />
+                      </IonButton>
+                      <IonButton
+                        size="large"
+                        fill="clear"
+                        onClick={() => appTimer.resume()}
+                      >
+                        <IonIcon icon={status === "paused" ? play : pause} />
+                      </IonButton>
+                      <IonButton
+                        size="large"
+                        fill="clear"
+                        onClick={() => nextTrainStep()}
+                      >
+                        <IonIcon icon={playSkipForward} />
+                      </IonButton>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </IonContent>
-          </IonModal>
-        </div>
-
-        <div onClick={() => appTimer.pause()}>
-          <div className="tw-py-4">
-            <div className="tw-px-4">
-              {/* <p>{train.title}</p> */}
-              <div>
-                <div className="tw-grid tw-px-16 tw-py-6">
-                  <CircularProgress
-                    style={{
-                      gridArea: "1/1",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    variant="determinate"
-                    value={(Math.ceil(time) / appTimer.duration) * 100}
-                  />
-                  <div
-                    className="tw-flex tw-justify-items-center tw-items-center"
-                    style={{ gridArea: "1/1" }}
-                  >
-                    <p className="tw-w-full tw-text-center tw-text-4xl">
-                      {Math.ceil(time / 1000)}
-                    </p>
+              </IonContent>
+            </IonModal>
+          </div>
+          <div onClick={() => appTimer.pause()}>
+            <div className="tw-py-4">
+              <div className="tw-px-4">
+                <div>
+                  <div className="tw-grid tw-px-16 tw-py-6">
+                    <CircularProgress
+                      style={{
+                        gridArea: "1/1",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      variant="determinate"
+                      value={(Math.ceil(time) / appTimer.duration) * 100}
+                    />
+                    <div
+                      className="tw-flex tw-justify-items-center tw-items-center"
+                      style={{ gridArea: "1/1" }}
+                    >
+                      <p className="tw-w-full tw-text-center tw-text-4xl">
+                        {Math.ceil(time / 1000)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                {(() => {
-                  const mode = getModeFromTimerStep(currentTimerStep);
-
-                  return (
-                    <>
-                      {mode === "initialCountdown" && (
-                        <div>
-                          <p>Preparado para começar.</p>
-                          {(() => {
+                  {(() => {
+                    const mode = getModeFromTimerStep(currentTimerStep);
+                    return (
+                      <>
+                        {mode === "initialCountdown" && (
+                          <div>
+                            <p>Preparado para começar.</p>
+                            {(() => {
+                              const nextStep = steps[currentTimerStep / 2];
+                              if (!nextStep) return null;
+                              return (
+                                <>
+                                  <p>
+                                    Começa com:{" "}
+                                    <span>{nextStep.meta.description}</span>.
+                                  </p>
+                                </>
+                              );
+                            })()}
+                            <p>
+                              Passo {currentTimerStep / 2 + 1} de {steps.length}
+                              .
+                            </p>
+                          </div>
+                        )}
+                        {mode === "interval" &&
+                          (() => {
                             const nextStep = steps[currentTimerStep / 2];
                             if (!nextStep) return null;
                             return (
                               <>
-                                <p>
-                                  Começa com:{" "}
-                                  <span>{nextStep.meta.description}</span>.
-                                </p>
+                                <div>
+                                  <p>Intervalo.</p>
+                                  <p>
+                                    Próximo passo: {nextStep.meta.description}.
+                                  </p>
+                                </div>
                               </>
                             );
                           })()}
-                          <p>
-                            Passo {currentTimerStep / 2 + 1} de {steps.length}.
-                          </p>
-                        </div>
-                      )}
-                      {mode === "interval" &&
-                        (() => {
-                          const nextStep = steps[currentTimerStep / 2];
-                          if (!nextStep) return null;
-                          return (
-                            <>
-                              <div>
-                                <p>Intervalo.</p>
-                                <p>
-                                  Próximo passo: {nextStep.meta.description}.
-                                </p>
-                              </div>
-                            </>
-                          );
-                        })()}
-                      {mode === "train" &&
-                        (() => {
-                          const currentStep = steps[(currentTimerStep - 1) / 2];
-                          if (!currentStep) return null;
-                          return (
-                            <>
-                              <div>
-                                <p>
-                                  <span>{(currentTimerStep - 1) / 2 + 1}</span>
-                                  <span> / </span>
-                                  <span>{steps.length}</span>:
-                                </p>
-                                <p>{currentStep.meta.description}</p>
-                              </div>
-                            </>
-                          );
-                        })()}
-                    </>
-                  );
-                })()}
+                        {mode === "train" &&
+                          (() => {
+                            const currentStep =
+                              steps[(currentTimerStep - 1) / 2];
+                            if (!currentStep) return null;
+                            return (
+                              <>
+                                <div>
+                                  <p>
+                                    <span>
+                                      {(currentTimerStep - 1) / 2 + 1}
+                                    </span>
+                                    <span> / </span>
+                                    <span>{steps.length}</span>:
+                                  </p>
+                                  <p>{currentStep.meta.description}</p>
+                                </div>
+                              </>
+                            );
+                          })()}
+                      </>
+                    );
+                  })()}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </>
-    </div>
+        </>
+      </div>
+    </>
   );
 };
 
