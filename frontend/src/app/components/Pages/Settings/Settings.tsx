@@ -28,9 +28,10 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import "../../../../translations/i18n";
 import { setSettings } from "../../../store/settings/actions/setSettings";
 import { getSettings } from "../../../store/settings/selectors/getSettings";
-import "../../../../translations/i18n";
+import SettingsDuration from "./SettingsDuration";
 
 const sourceCodeURL = "https://github.com/guesant/ya-time-marker-ionic";
 const licenseURL =
@@ -142,9 +143,7 @@ const Settings: React.FC = () => {
               const plData = getData(i18n, previousLanguage);
               const isToastOpen =
                 showToastUndoLanguage &&
-                previousLanguage !== language &&
-                previousLanguage !== null;
-
+                [language, null].every((i) => previousLanguage !== i);
               return (
                 <>
                   {isToastOpen && (
@@ -166,6 +165,9 @@ const Settings: React.FC = () => {
               );
             })()}
         </>
+        <div>
+          <SettingsDuration />
+        </div>
         <div>
           <IonList>
             <IonListHeader>
