@@ -20,10 +20,10 @@ const CRUDTrainContentGeneral: React.FC<CRUDTrainContentGeneralProps> = ({
   return (
     <>
       <div className="tw-px-4 tw-py-4">
-        <div className="tw-mt-2">
+        <div>
           <TextField
             fullWidth
-            label="Nome"
+            placeholder="Nome"
             variant="outlined"
             value={train.title}
             InputProps={{ readOnly: !isEditMode }}
