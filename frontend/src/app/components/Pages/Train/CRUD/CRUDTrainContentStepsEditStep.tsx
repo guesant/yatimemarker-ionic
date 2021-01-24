@@ -38,13 +38,15 @@ export type CRUDTrainContentStepsEditStepProps = CRUDTrainProps & {
   value: any;
 };
 
-const getUnifiedMode = (step: ITrainStep) => {
-  const { type, payload } = step.payload;
-  if (type === "ref") {
-    return ["d", type, payload].join("_");
-  }
-  return type;
-};
+const getUnifiedMode = (step: ITrainStep) =>
+  step.type === "duration"
+    ? [
+        "d",
+        ...(step.payload.type === "ref"
+          ? [step.payload.type, step.payload.payload]
+          : [step.payload.type]),
+      ].join("_")
+    : step.type;
 
 const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps> = ({
   value,
