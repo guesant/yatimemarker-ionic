@@ -8,26 +8,31 @@
 import localForage from "localforage";
 import { setSettings } from "./settings/actions/setSettings";
 import { getSettings } from "./settings/selectors/getSettings";
-import { settingsSchema } from "../types/Settings";
+import { ISettingsState, settingsSchema } from "../types/Settings";
 import { store } from "./configureStore";
 
-export async function setupSettingsStorage() {
-  async function loadSettings() {
-    const settings = settingsSchema.cast(
-      (await localForage.getItem("settings")) || {},
-    );
+const getPersistentSettings = async (defaultValue: any = {}) =>
+  (await localForage.getItem("settings")) || defaultValue;
+
+const setPersistentSettings = async (state: ISettingsState) => {
+  await localForage.setItem("settings", state);
+};
+
+export async function setupPersistenteStorage() {
+  async function loadState() {
+    const settings = settingsSchema.cast(await getPersistentSettings());
     store.dispatch(setSettings(settings));
   }
 
-  async function saveSettings() {
-    await localForage.setItem("settings", getSettings(store.getState()));
+  async function saveState() {
+    await setPersistentSettings(getSettings(store.getState()));
   }
 
-  async function subscribeSettings() {
-    saveSettings();
-    store.subscribe(() => saveSettings());
+  async function subscribePersistenceWatch() {
+    saveState();
+    store.subscribe(() => saveState());
   }
 
-  await loadSettings();
-  await subscribeSettings();
+  await loadState();
+  await subscribePersistenceWatch();
 }

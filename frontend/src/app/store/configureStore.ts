@@ -8,7 +8,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { AppTheme } from "../services/AppTheme";
 import settingsReducer from "./settings";
-import { setupSettingsStorage } from "./setupSettingsStorage";
+import { setupPersistenteStorage } from "./setupSettingsStorage";
 
 const reducer = combineReducers({ settings: settingsReducer });
 
@@ -18,6 +18,6 @@ store.subscribe(() => {
   AppTheme.loadTheme();
 });
 
-setupSettingsStorage();
+setupPersistenteStorage();
 
 export default store;
