@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import fromPairs from "lodash.frompairs";
 import { parseStateDuration } from "./parseStateDuration";
 import { modifyDictValues } from "./modifyDictValues";
