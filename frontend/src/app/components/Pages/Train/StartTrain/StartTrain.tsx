@@ -19,15 +19,10 @@ import {
 import { ITrain } from "@ya-time-marker/lib";
 import { getTrain } from "@ya-time-marker/lib/build/Api/Trains";
 import { arrowBack } from "ionicons/icons";
-import ms from "ms";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { ISettingsState } from "../../../../types/Settings";
 import { useFetch } from "../../../Hooks/useFetch";
 import StartTrainRunner from "./StartTrainRunner";
-
-const parseStateDuration = (duration: string | number) => ms(String(duration));
 
 const StartTrain: React.FC = () => {
   const history = useHistory();
@@ -35,10 +30,6 @@ const StartTrain: React.FC = () => {
   const [isTrainDone, setIsTrainDone] = useState(false);
   const { makeFetch, data, isLoading } = useFetch<null | ITrain>();
   const [showLeftAlertConfirm, setShowLeftAlertConfirm] = useState(false);
-
-  const { duration } = useSelector(
-    (state): ISettingsState => (state as any).settings,
-  );
 
   useEffect(() => {
     if ((!data || data._id !== id) && !isLoading) {
@@ -86,14 +77,7 @@ const StartTrain: React.FC = () => {
               <>
                 <StartTrainRunner
                   train={data}
-                  onTrainEnd={() => {
-                    setIsTrainDone(true);
-                  }}
-                  trainDuration={parseStateDuration(duration.train)}
-                  intervalDuration={parseStateDuration(duration.interval)}
-                  countdownDuration={parseStateDuration(
-                    duration.startCountdown,
-                  )}
+                  onTrainEnd={() => setIsTrainDone(true)}
                 />
               </>
             )}

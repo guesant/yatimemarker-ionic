@@ -32,6 +32,7 @@ import {
   playSkipForward,
 } from "ionicons/icons";
 import React, { useCallback, useEffect, useState } from "react";
+import { useStepContext } from "../Hooks/useStepContext";
 import styles from "./StartTrainRunner.module.css";
 import { useTimer } from "./useTimer";
 
@@ -54,16 +55,11 @@ const getModeFromTimerStep = (timerStep: number): IMode | null => {
 
 export type StartTrainRunnerProps = {
   train: ITrain;
-  trainDuration: number;
-  intervalDuration: number;
-  countdownDuration: number;
+
   onTrainEnd: () => any;
 };
 
 const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
-  trainDuration,
-  intervalDuration,
-  countdownDuration,
   train: { steps },
   onTrainEnd,
 }) => {
@@ -72,39 +68,28 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
   const [status, setStatus] = useState("");
   const [currentTimerStep, setCurrentTimerStep] = useState(-2);
 
+  const stepContext = useStepContext();
+
   const startTimer = useCallback(() => {
     appTimer.stop();
     if (currentTimerStep >= 0) {
       switch (getModeFromTimerStep(currentTimerStep)) {
         case "initialCountdown":
-          appTimer.start(countdownDuration);
+          appTimer.start(stepContext.duration.startCountdown);
           break;
         case "interval":
-          appTimer.start(intervalDuration);
+          appTimer.start(stepContext.duration.interval);
           break;
         case "train":
           const step = steps[(currentTimerStep - 1) / 2];
           if (step) {
-            const duration = computeStepDuration({
-              duration: {
-                interval: intervalDuration,
-                startCountdown: countdownDuration,
-                train: trainDuration,
-              },
-            })(step);
+            const duration = computeStepDuration(stepContext)(step);
             appTimer.start(duration);
           }
           break;
       }
     }
-  }, [
-    appTimer,
-    currentTimerStep,
-    countdownDuration,
-    intervalDuration,
-    steps,
-    trainDuration,
-  ]);
+  }, [appTimer, currentTimerStep, steps, stepContext]);
 
   const prevTrainStep = useCallback(() => {
     const currentMode = getModeFromTimerStep(currentTimerStep);
