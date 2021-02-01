@@ -23,9 +23,11 @@ importers:
       "@testing-library/react": 9.5.0_react-dom@16.14.0+react@16.14.0
       "@testing-library/user-event": 8.1.3
       "@types/deep-equal": 1.0.1
+      "@types/humanize-duration": 3.18.1
       "@types/jest": 24.9.1
       "@types/loadable__component": 5.13.1
       "@types/lodash.debounce": 4.0.6
+      "@types/lodash.frompairs": 4.0.6
       "@types/ms": 0.7.31
       "@types/node": 12.19.11
       "@types/react": 16.14.2
@@ -36,12 +38,14 @@ importers:
       "@ya-time-marker/lib": "link:../ya-time-marker-lib"
       autoprefixer: 9.8.6
       deep-equal: 2.0.5
+      humanize-duration: 3.25.1
       i18next: 19.8.4
       i18next-browser-languagedetector: 6.0.1
       immer: 8.0.0
       ionicons: 5.2.3
       localforage: 1.9.0
       lodash.debounce: 4.0.8
+      lodash.frompairs: 4.0.1
       ms: 2.1.3
       postcss: 7.0.35
       react: 16.14.0
@@ -74,9 +78,11 @@ importers:
       "@testing-library/react": ^9.4.0
       "@testing-library/user-event": ^8.0.3
       "@types/deep-equal": ^1.0.1
+      "@types/humanize-duration": ^3.18.1
       "@types/jest": ^24.0.25
       "@types/loadable__component": ^5.13.1
       "@types/lodash.debounce": ^4.0.6
+      "@types/lodash.frompairs": ^4.0.6
       "@types/ms": ^0.7.31
       "@types/node": ^12.12.24
       "@types/react": ^16.9.17
@@ -87,12 +93,14 @@ importers:
       "@ya-time-marker/lib": "link:../ya-time-marker-lib"
       autoprefixer: ^9.8.6
       deep-equal: ^2.0.5
+      humanize-duration: ^3.25.1
       i18next: ^19.8.4
       i18next-browser-languagedetector: ^6.0.1
       immer: ^8.0.0
       ionicons: ^5.0.0
       localforage: ^1.9.0
       lodash.debounce: ^4.0.8
+      lodash.frompairs: ^4.0.1
       ms: ^2.1.3
       postcss: ^7.0.35
       react: ^16.13.0
@@ -3642,6 +3650,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  /@types/humanize-duration/3.18.1:
+    dev: false
+    resolution:
+      integrity: sha512-MUgbY3CF7hg/a/jogixmAufLjJBQT7WEf8Q+kYJkOc47ytngg1IuZobCngdTjAgY83JWEogippge5O5fplaQlw==
   /@types/istanbul-lib-coverage/2.0.3:
     resolution:
       integrity: sha512-sz7iLqvVUg1gIedBOvlkxPlc8/uVzyS5OwGz1cKjXzkl3FpL3al0crU8YGU1WoHkxn0Wxbw5tyi6hvzJKNzFsw==
@@ -3684,10 +3696,20 @@ packages:
     dev: false
     resolution:
       integrity: sha512-4WTmnnhCfDvvuLMaF3KV4Qfki93KebocUF45msxhYyjMttZDQYzHkO639ohhk8+oco2cluAFL3t5+Jn4mleylQ==
+  /@types/lodash.frompairs/4.0.6:
+    dependencies:
+      "@types/lodash": 4.14.168
+    dev: false
+    resolution:
+      integrity: sha512-rwCUf4NMKhXpiVjL/RXP8YOk+rd02/J4tACADEgaMXRVnzDbSSlBMKFZoX/ARmHVLg3Qc98Um4PErGv8FbxU7w==
   /@types/lodash/4.14.167:
     dev: false
     resolution:
       integrity: sha512-w7tQPjARrvdeBkX/Rwg95S592JwxqOjmms3zWQ0XZgSyxSLdzWaYH3vErBhdVS/lRBX7F8aBYcYJYTr5TMGOzw==
+  /@types/lodash/4.14.168:
+    dev: false
+    resolution:
+      integrity: sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
   /@types/minimatch/3.0.3:
     dev: false
     resolution:
@@ -8366,6 +8388,10 @@ packages:
       node: ">=8.12.0"
     resolution:
       integrity: sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
+  /humanize-duration/3.25.1:
+    dev: false
+    resolution:
+      integrity: sha512-P+dRo48gpLgc2R9tMRgiDRNULPKCmqFYgguwqOO2C0fjO35TgdURDQDANSR1Nt92iHlbHGMxOTnsB8H8xnMa2Q==
   /husky/4.3.6:
     dependencies:
       chalk: 4.1.0
@@ -10572,6 +10598,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+  /lodash.frompairs/4.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-vE5SB/onV8E25XNhTpZkUGsrG9I=
   /lodash.memoize/4.1.2:
     dev: false
     resolution:
