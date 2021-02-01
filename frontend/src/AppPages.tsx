@@ -23,13 +23,6 @@ export const PageSearch = loadable(
     ),
 );
 
-export const PageProfile = loadable(
-  () =>
-    import(
-      /* webpackChunkName: "page-profile" */ `${BASE_PAGES_PATH}/Profile/Profile.tsx`
-    ),
-);
-
 export const PageSettings = loadable(
   () =>
     import(

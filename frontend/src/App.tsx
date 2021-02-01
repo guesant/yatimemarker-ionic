@@ -13,21 +13,11 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import React, { Suspense } from "react";
 import { Redirect, Route } from "react-router-dom";
 import "./App.css";
-import {
-  PageHome,
-  PageNewTrain,
-  PageProfile,
-  PageSearch,
-  PageSettings,
-  PageStartTrain,
-  PageViewTrain,
-} from "./AppPages";
 import "./app/assets/tw-dist.css";
 import { useAppTheme } from "./app/components/Hooks/useAppTheme";
 import LoadingPage from "./app/components/LoadingPage";
 import {
   ROUTE_HOME,
-  ROUTE_PROFILE,
   ROUTE_SEARCH,
   ROUTE_SETTINGS,
   ROUTE_TRAIN_NEW,
@@ -35,6 +25,14 @@ import {
   ROUTE_TRAIN_VIEW,
 } from "./app/components/Routes";
 import "./app/theme/variables.css";
+import {
+  PageHome,
+  PageNewTrain,
+  PageSearch,
+  PageSettings,
+  PageStartTrain,
+  PageViewTrain,
+} from "./AppPages";
 
 const App: React.FC = () => {
   const [theme] = useAppTheme();
@@ -57,11 +55,6 @@ const App: React.FC = () => {
               <IonRouterOutlet>
                 <Route path={ROUTE_HOME()} component={PageHome} exact={true} />
                 <Route path={ROUTE_SEARCH()} component={PageSearch} exact />
-                <Route
-                  path={ROUTE_PROFILE()}
-                  component={PageProfile}
-                  exact={true}
-                />
                 <Route
                   path={ROUTE_SETTINGS()}
                   component={PageSettings}

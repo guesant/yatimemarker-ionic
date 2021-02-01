@@ -33,12 +33,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import "../../../../translations/i18n";
-import {
-  ROUTE_PROFILE,
-  ROUTE_SEARCH,
-  ROUTE_SETTINGS,
-  ROUTE_TRAIN_NEW,
-} from "../../Routes";
+import { ROUTE_SEARCH, ROUTE_SETTINGS, ROUTE_TRAIN_NEW } from "../../Routes";
 import TrainCard from "../../TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
@@ -148,10 +143,6 @@ const Home: React.FC = () => {
             >
               <IonList>
                 {([
-                  {
-                    text: t("my_profile"),
-                    action: () => history.push(ROUTE_PROFILE()),
-                  },
                   {
                     text: t("settings"),
                     action: () => history.push(ROUTE_SETTINGS()),
