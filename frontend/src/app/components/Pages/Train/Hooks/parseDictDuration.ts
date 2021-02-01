@@ -5,12 +5,12 @@
  */
 //endregion
 
+import { ITrainContext } from "@ya-time-marker/lib";
 import fromPairs from "lodash.frompairs";
-import { parseStateDuration } from "./parseStateDuration";
 import { modifyDictValues } from "./modifyDictValues";
-import { IStepContext } from "./useStepContext";
+import { parseStateDuration } from "./parseStateDuration";
 
 export const parseDictDuration = (duration: any) =>
   fromPairs(
     modifyDictValues<string, number>((i) => parseStateDuration(i))(duration),
-  ) as IStepContext["duration"];
+  ) as ITrainContext["duration"];
