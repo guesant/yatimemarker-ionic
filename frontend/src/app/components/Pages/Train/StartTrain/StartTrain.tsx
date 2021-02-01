@@ -67,19 +67,23 @@ const StartTrainWithRunner: React.FC<{
               <>
                 {!isTrainDone && (
                   <>
-                    <StartTrainRunner />
-                    <IonAlert
-                      isOpen={showLeftAlertConfirm}
-                      onDidDismiss={() => setShowLeftAlertConfirm(false)}
-                      header={"Left Train"}
-                      message={
-                        "Você tem certeza de que deseja sair deste treino?"
-                      }
-                      buttons={[
-                        { text: "Não", role: "cancel", handler: () => {} },
-                        { text: "Sim", handler: () => exitTrain() },
-                      ]}
-                    />
+                    <div style={{ zIndex: 0 }}>
+                      <StartTrainRunner />
+                    </div>
+                    <div style={{ zIndex: 1 }}>
+                      <IonAlert
+                        isOpen={showLeftAlertConfirm}
+                        onDidDismiss={() => setShowLeftAlertConfirm(false)}
+                        header={"Left Train"}
+                        message={
+                          "Você tem certeza de que deseja sair deste treino?"
+                        }
+                        buttons={[
+                          { text: "Não", role: "cancel", handler: () => {} },
+                          { text: "Sim", handler: () => exitTrain() },
+                        ]}
+                      />
+                    </div>
                   </>
                 )}
                 {isTrainDone && (
