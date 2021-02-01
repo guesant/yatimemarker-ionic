@@ -28,7 +28,7 @@ const CRUDTrainContentStepsList: React.FC<CRUDTrainContentStepsListProps> = ({
         </IonLabel>
       )}
       {train.steps.length > 0 &&
-        train.steps.map(({ meta: { description } }, idx) => (
+        train.steps.map(({ meta: { description = "" } = {} }, idx) => (
           <Fragment
             key={idx}
             children={
@@ -36,7 +36,9 @@ const CRUDTrainContentStepsList: React.FC<CRUDTrainContentStepsListProps> = ({
                 detail={false}
                 button={isEditMode}
                 onClick={() => isEditMode && toEditIndex(idx)}
-                children={<IonLabel>{description}</IonLabel>}
+                children={
+                  <IonLabel>{description || `Passo ${idx + 1}`}</IonLabel>
+                }
               />
             }
           />

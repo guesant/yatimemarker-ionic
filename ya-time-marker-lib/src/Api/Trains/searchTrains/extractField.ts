@@ -11,7 +11,7 @@ export const extractField = (document: any, fieldName: string) => {
   switch (fieldName) {
     case "steps":
       return (document as ITrain).steps
-        .map(({ meta: { description } }) => description)
+        .map(({ meta: { description = "" } = {} }) => description)
         .join(" ");
     default:
       return fieldName

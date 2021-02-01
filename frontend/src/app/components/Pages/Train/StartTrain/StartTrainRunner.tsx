@@ -55,7 +55,6 @@ const getModeFromTimerStep = (timerStep: number): IMode | null => {
 
 export type StartTrainRunnerProps = {
   train: ITrain;
-
   onTrainEnd: () => any;
 };
 
@@ -275,13 +274,18 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
                           <div>
                             <p>Preparado para começar.</p>
                             {(() => {
-                              const nextStep = steps[currentTimerStep / 2];
+                              const index = currentTimerStep / 2;
+                              const nextStep = steps[index];
                               if (!nextStep) return null;
                               return (
                                 <>
                                   <p>
                                     Começa com:{" "}
-                                    <span>{nextStep.meta.description}</span>.
+                                    <span>
+                                      {nextStep.meta?.description ||
+                                        `Passo ${index + 1}.`}
+                                    </span>
+                                    .
                                   </p>
                                 </>
                               );
@@ -294,14 +298,18 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
                         )}
                         {mode === "interval" &&
                           (() => {
-                            const nextStep = steps[currentTimerStep / 2];
+                            const index = currentTimerStep / 2;
+                            const nextStep = steps[index];
                             if (!nextStep) return null;
                             return (
                               <>
                                 <div>
                                   <p>Intervalo.</p>
                                   <p>
-                                    Próximo passo: {nextStep.meta.description}.
+                                    Próximo passo:{" "}
+                                    {nextStep.meta?.description ||
+                                      `Passo ${index + 1}`}
+                                    .
                                   </p>
                                 </div>
                               </>
@@ -309,8 +317,8 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
                           })()}
                         {mode === "train" &&
                           (() => {
-                            const currentStep =
-                              steps[(currentTimerStep - 1) / 2];
+                            const index = (currentTimerStep - 1) / 2;
+                            const currentStep = steps[index];
                             if (!currentStep) return null;
                             return (
                               <>
@@ -322,7 +330,10 @@ const StartTrainRunner: React.FC<StartTrainRunnerProps> = ({
                                     <span> / </span>
                                     <span>{steps.length}</span>:
                                   </p>
-                                  <p>{currentStep.meta.description}</p>
+                                  <p>
+                                    {currentStep.meta?.description ||
+                                      `Passo ${index + 1}.`}
+                                  </p>
                                 </div>
                               </>
                             );

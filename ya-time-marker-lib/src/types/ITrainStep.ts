@@ -9,7 +9,7 @@ import { ITrainContext } from "./ITrainContext";
 import { ITrainStepMeta } from "./ITrainStepMeta";
 
 export type ITrainStepCore<Meta = ITrainStepMeta> = {
-  meta: Meta;
+  meta?: Meta;
 };
 
 export type ITrainStepInfo<Meta = ITrainStepMeta> = ITrainStepCore<Meta> & {

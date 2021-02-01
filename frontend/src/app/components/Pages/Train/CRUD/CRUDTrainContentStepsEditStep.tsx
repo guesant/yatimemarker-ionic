@@ -48,6 +48,15 @@ const getUnifiedMode = (step: ITrainStep) =>
       ].join("_")
     : step.type;
 
+const ensureStepMeta = (step: ITrainStep) => {
+  if (!step.meta) {
+    step.meta = { description: "" };
+  } else if (!step.meta.description) {
+    step.meta.description = "";
+  }
+  return step;
+};
+
 const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps> = ({
   value,
   onDelete,
@@ -103,18 +112,20 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
             <div className="tw-py-4">
               <div className="tw-mt-2">
                 <TextField
-                  value={updatedStep.meta.description}
+                  value={updatedStep.meta?.description || ""}
                   onChange={({ target }) => {
                     setUpdatedStep(
                       produce(updatedStep, (draft) => {
-                        draft.meta.description = target.value;
+                        ensureStepMeta(draft);
+                        draft.meta!.description = target.value;
                       }),
                     );
                   }}
                   onBlur={({ target }) => {
                     setUpdatedStep(
                       produce(updatedStep, (draft) => {
-                        draft.meta.description = target.value.trim();
+                        ensureStepMeta(draft);
+                        draft.meta!.description = target.value.trim();
                       }),
                     );
                   }}
