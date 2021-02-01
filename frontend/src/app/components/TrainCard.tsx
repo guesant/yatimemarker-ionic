@@ -10,17 +10,28 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonCardSubtitle,
   IonCardTitle,
 } from "@ionic/react";
+import { SvgIcon } from "@material-ui/core";
+import TimerIcon from "@material-ui/icons/Timer";
 import { ITrain } from "@ya-time-marker/lib";
+import { computeAllTrainDurations } from "@ya-time-marker/lib/build/utils/computeAllTrainDurations";
 import React from "react";
 import { useHistory } from "react-router";
+import { shortEnglishDurationHumanizer } from "./Helpers/shortEnglishDurationHumanizer";
+import { useStepContext } from "./Pages/Train/Hooks/useStepContext";
 import { ROUTE_TRAIN_START, ROUTE_TRAIN_VIEW } from "./Routes";
 
 export type TrainCardProps = { train: ITrain };
 
-const TrainCard: React.FC<TrainCardProps> = ({ train: { title, _id } }) => {
+const TrainCard: React.FC<TrainCardProps> = ({
+  train,
+  train: { title, _id },
+}) => {
   const history = useHistory();
+  const stepContext = useStepContext();
+  const { totalDuration } = computeAllTrainDurations(stepContext)(train);
   return (
     <>
       <IonCard
@@ -29,6 +40,16 @@ const TrainCard: React.FC<TrainCardProps> = ({ train: { title, _id } }) => {
       >
         <IonCardHeader>
           <IonCardTitle>{title}</IonCardTitle>
+          <IonCardSubtitle>
+            <div className="tw-flex tw-flex-wrap tw-items-center tw-gap-1">
+              <div className="tw-text-lg">
+                <SvgIcon fontSize="inherit" component={TimerIcon} />
+              </div>
+              <p>
+                <span>{shortEnglishDurationHumanizer(totalDuration)}</span>
+              </p>
+            </div>
+          </IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <div className="tw-flex tw-justify-end " style={{ gap: "2px" }}>
