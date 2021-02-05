@@ -33,12 +33,15 @@ import { useHistory, useParams } from "react-router";
 import { useFetch } from "../../../Hooks/useFetch";
 import { ROUTE_HOME, ROUTE_TRAIN_START } from "../../../Routes";
 import { useStepContext } from "../Hooks/useStepContext";
+import "../../../../../translations/i18n";
+import { useTranslation } from "react-i18next";
 
 const extendedStringifyMS = (duration: number) =>
   duration === Infinity ? String(Infinity) : ms(duration);
 
 const ViewTrain: React.FC = () => {
   const history = useHistory();
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const [showActionSheet, setShowActionSheet] = useState(false);
 
@@ -80,7 +83,7 @@ const ViewTrain: React.FC = () => {
             <div>
               <div className="tw-py-4">
                 <div className="tw-px-4">
-                  <p>Carregando...</p>
+                  <p>{t("loading")}</p>
                 </div>
               </div>
             </div>
@@ -97,13 +100,13 @@ const ViewTrain: React.FC = () => {
                   onDidDismiss={() => setShowActionSheet(false)}
                   buttons={[
                     {
-                      text: "Deletar Treino",
+                      text: t("view_train_action_delete_train"),
                       role: "destructive",
                       icon: trash,
                       handler: actionDeleteTrain,
                     },
                     {
-                      text: "Cancelar",
+                      text: t("view_train_action_cancel"),
                       icon: close,
                       role: "cancel",
                     },
@@ -130,7 +133,9 @@ const ViewTrain: React.FC = () => {
                         })}
                         {steps.length > 1 && (
                           <IonItem>
-                            <IonLabel>{">"} Intervalo</IonLabel>
+                            <IonLabel>
+                              {">"} {t("settings_duration_interval")}
+                            </IonLabel>
                             <IonLabel slot="end" className="tw-text-right">
                               {ms(stepContext.duration.interval)}
                             </IonLabel>
@@ -138,7 +143,9 @@ const ViewTrain: React.FC = () => {
                         )}
                         {steps.length > 0 && (
                           <IonItem>
-                            <IonLabel>{">"} Contagem Regressiva</IonLabel>
+                            <IonLabel>
+                              {">"} {t("settings_duration_countdown")}
+                            </IonLabel>
                             <IonLabel slot="end" className="tw-text-right">
                               {ms(stepContext.duration.startCountdown)}
                             </IonLabel>
@@ -152,7 +159,7 @@ const ViewTrain: React.FC = () => {
                     <div>
                       <IonList>
                         <IonItem>
-                          <IonLabel>Total</IonLabel>
+                          <IonLabel>{t("view_train_duration_total")}</IonLabel>
                           <IonLabel slot="end" className="tw-text-right">
                             {ms(
                               computeAllTrainDurations(stepContext)(train)
@@ -162,13 +169,12 @@ const ViewTrain: React.FC = () => {
                         </IonItem>
                       </IonList>
                     </div>
-
                     <div className="tw-px-4 tw-py-3">
                       <IonButton
                         expand="block"
                         onClick={() => history.push(ROUTE_TRAIN_START({ id }))}
                       >
-                        Iniciar Treino
+                        {t("start_train_call_to_action")}
                       </IonButton>
                     </div>
                   </div>

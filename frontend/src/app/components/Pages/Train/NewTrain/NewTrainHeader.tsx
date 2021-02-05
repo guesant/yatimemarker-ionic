@@ -11,12 +11,15 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DoneIcon from "@material-ui/icons/Done";
 import { addTrain } from "@ya-time-marker/lib/build/Api/Trains/addTrain";
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
+import "../../../../../translations/i18n";
 import { ROUTE_HOME } from "../../../Routes";
 import CRUDTrainHeader from "../CRUD/CRUDTrainHeader";
 import { NewTrainContext } from "./Hooks/NewTrainContext";
 
 export const NewTrainHeader: React.FC = () => {
+  const { t } = useTranslation();
   const history = useHistory();
 
   const {
@@ -38,7 +41,7 @@ export const NewTrainHeader: React.FC = () => {
   return (
     <>
       <CRUDTrainHeader
-        pageTitle="Novo Treino"
+        pageTitle={t("new_train_header")}
         beforeTitle={
           <IonButtons slot="start">
             <IonButton onClick={() => history.go(-1)}>

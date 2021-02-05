@@ -33,8 +33,11 @@ import React, { useContext } from "react";
 import { getModeFromTimerStep } from "./Hooks/getModeFromTimerStep";
 import { StartTrainContext } from "./Hooks/StartTrainContext";
 import styles from "./StartTrainRunner.module.css";
+import "../../../../../translations/i18n";
+import { useTranslation } from "react-i18next";
 
 const StartTrainRunner: React.FC = () => {
+  const { t } = useTranslation();
   const {
     time,
     appTimer,
@@ -82,7 +85,7 @@ const StartTrainRunner: React.FC = () => {
             >
               <IonHeader>
                 <IonToolbar>
-                  <IonTitle>Pausa</IonTitle>
+                  <IonTitle>{t("start_train_runner_paused_header")}</IonTitle>
                   <IonButtons slot="end">
                     <IonButton onClick={() => appTimer.resume()}>
                       <IonIcon icon={close} />
@@ -97,7 +100,7 @@ const StartTrainRunner: React.FC = () => {
                       className="tw-text-3xl tw-font-bold tw-mb-2"
                       style={{ color: "var(--ion-text-color)" }}
                     >
-                      Pausa
+                      {t("start_train_runner_paused_description")}
                     </IonLabel>
                     <div>
                       <IonButton
@@ -156,7 +159,7 @@ const StartTrainRunner: React.FC = () => {
                       <>
                         {mode === "initialCountdown" && (
                           <div>
-                            <p>Preparado para começar.</p>
+                            <p>{t("start_train_runner_state_ready_to_go")}</p>
                             {(() => {
                               const index = currentTimerStep / 2;
                               const nextStep = steps[index];
@@ -164,19 +167,20 @@ const StartTrainRunner: React.FC = () => {
                               return (
                                 <>
                                   <p>
-                                    Começa com:{" "}
-                                    <span>
-                                      {nextStep.meta?.description ||
-                                        `Passo ${index + 1}.`}
-                                    </span>
-                                    .
+                                    {t("start_train_runner_state_starts_with", {
+                                      description:
+                                        nextStep.meta?.description ||
+                                        `Passo ${index + 1}.`,
+                                    })}
                                   </p>
                                 </>
                               );
                             })()}
                             <p>
-                              Passo {currentTimerStep / 2 + 1} de {steps.length}
-                              .
+                              {t("start_train_runner_nth_step_of_total", {
+                                step: currentTimerStep / 2 + 1,
+                                total: steps.length,
+                              })}
                             </p>
                           </div>
                         )}
@@ -188,12 +192,15 @@ const StartTrainRunner: React.FC = () => {
                             return (
                               <>
                                 <div>
-                                  <p>Intervalo.</p>
                                   <p>
-                                    Próximo passo:{" "}
-                                    {nextStep.meta?.description ||
-                                      `Passo ${index + 1}`}
-                                    .
+                                    {t("start_train_runner_state_interval")}
+                                  </p>
+                                  <p>
+                                    {t("start_train_runner_state_next_step", {
+                                      description:
+                                        nextStep.meta?.description ||
+                                        `Passo ${index + 1}`,
+                                    })}
                                   </p>
                                 </div>
                               </>
@@ -208,11 +215,14 @@ const StartTrainRunner: React.FC = () => {
                               <>
                                 <div>
                                   <p>
-                                    <span>
-                                      {(currentTimerStep - 1) / 2 + 1}
-                                    </span>
-                                    <span> / </span>
-                                    <span>{steps.length}</span>:
+                                    {t(
+                                      "start_train_runner_nth_step_slash_total",
+                                      {
+                                        step: (currentTimerStep - 1) / 2 + 1,
+                                        total: steps.length,
+                                      },
+                                    )}
+                                    :
                                   </p>
                                   <p>
                                     {currentStep.meta?.description ||

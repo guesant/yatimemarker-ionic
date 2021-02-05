@@ -112,6 +112,7 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
             <div className="tw-py-4">
               <div className="tw-mt-2">
                 <TextField
+                  fullWidth
                   value={updatedStep.meta?.description || ""}
                   onChange={({ target }) => {
                     setUpdatedStep(
@@ -129,8 +130,9 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                       }),
                     );
                   }}
-                  fullWidth
-                  placeholder="Descrição"
+                  placeholder={t(
+                    "crud_train_content_step_edit_step_description",
+                  )}
                   variant="outlined"
                 />
               </div>
@@ -138,7 +140,7 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
           </div>
           <IonList>
             <IonItem>
-              <IonLabel>Modo</IonLabel>
+              <IonLabel>{t("crud_train_content_step_edit_step_mode")}</IonLabel>
               <IonSelect
                 value={unifiedMode}
                 okText={t("prompt_ok")}
@@ -174,14 +176,23 @@ const CRUDTrainContentStepsEditStep: React.FC<CRUDTrainContentStepsEditStepProps
                 }}
                 children={
                   <>
-                    <IonSelectOption value="text" children="Prescrição" />
+                    <IonSelectOption
+                      value="text"
+                      children={t(
+                        "crud_train_content_step_edit_step_mode_prescription",
+                      )}
+                    />
                     <IonSelectOption
                       value="d_ref_train"
-                      children="Preferência: Treino"
+                      children={t(
+                        "crud_train_content_step_edit_step_mode_reference.train",
+                      )}
                     />
                     <IonSelectOption
                       value="d_template"
-                      children="Tempo Customizado"
+                      children={t(
+                        "crud_train_content_step_edit_step_mode_custom",
+                      )}
                     />
                   </>
                 }

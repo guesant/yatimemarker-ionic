@@ -20,7 +20,9 @@ import { ITrain } from "@ya-time-marker/lib";
 import { getTrain } from "@ya-time-marker/lib/build/Api/Trains";
 import { arrowBack } from "ionicons/icons";
 import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory, useParams } from "react-router";
+import "../../../../../translations/i18n";
 import { useFetch } from "../../../Hooks/useFetch";
 import {
   StartTrainContext,
@@ -31,6 +33,7 @@ import StartTrainRunner from "./StartTrainRunner";
 const StartTrainWithRunner: React.FC<{
   isTrainDone: boolean;
 }> = ({ isTrainDone }) => {
+  const { t } = useTranslation();
   const history = useHistory();
   const [showLeftAlertConfirm, setShowLeftAlertConfirm] = useState(false);
   const { appTimer } = useContext(StartTrainContext);
@@ -54,7 +57,7 @@ const StartTrainWithRunner: React.FC<{
               <IonIcon icon={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>Treino</IonTitle>
+          <IonTitle>{t("start_train_header")}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -68,11 +71,18 @@ const StartTrainWithRunner: React.FC<{
                 <IonAlert
                   isOpen={!isTrainDone && showLeftAlertConfirm}
                   onDidDismiss={() => setShowLeftAlertConfirm(false)}
-                  header={"Left Train"}
-                  message={"Você tem certeza de que deseja sair deste treino?"}
+                  header={t("start_train_left_train")}
+                  message={t("start_train_left_train_message")}
                   buttons={[
-                    { text: "Não", role: "cancel", handler: () => {} },
-                    { text: "Sim", handler: () => exitTrain() },
+                    {
+                      text: t("start_train_left_train_option_cancel"),
+                      role: "cancel",
+                      handler: () => {},
+                    },
+                    {
+                      text: t("start_train_left_train_option_confirm"),
+                      handler: () => exitTrain(),
+                    },
                   ]}
                 />
               </div>
@@ -83,7 +93,7 @@ const StartTrainWithRunner: React.FC<{
               <div>
                 <div className="tw-py-4">
                   <div className="tw-px-4">
-                    <p>Feito.</p>
+                    <p>{t("start_train_train_done")}</p>
                   </div>
                 </div>
               </div>
@@ -97,6 +107,7 @@ const StartTrainWithRunner: React.FC<{
 
 const StartTrain: React.FC = () => {
   const history = useHistory();
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const [isTrainDone, setIsTrainDone] = useState(false);
   const { makeFetch, data, isLoading } = useFetch<null | ITrain>();
@@ -119,14 +130,14 @@ const StartTrain: React.FC = () => {
                     <IonIcon icon={arrowBack} />
                   </IonButton>
                 </IonButtons>
-                <IonTitle>Treino</IonTitle>
+                <IonTitle>{t("start_train_header")}</IonTitle>
               </IonToolbar>
             </IonHeader>
             <IonContent>
               <div>
                 <div className="tw-py-4">
                   <div className="tw-px-4">
-                    <p>Carregando...</p>
+                    <p>{t("loading")}</p>
                   </div>
                 </div>
               </div>

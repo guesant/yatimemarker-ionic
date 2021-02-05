@@ -14,10 +14,18 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    lng: "en",
+    supportedLngs: ["en"],
     resources: {
       en: {
         translation: TRANSLATIONS_EN,
       },
+    },
+    detection: {
+      order: ["querystring", "localStorage", "navigator", "htmlTag"],
+      lookupQuerystring: "lng",
+      lookupLocalStorage: "i18nextLng",
+      cookieOptions: { path: "/", sameSite: "strict" },
     },
   });
 
@@ -26,7 +34,8 @@ i18n.on("languageChanged", (lang) => {
 });
 
 function loadLocalLanguage() {
-  const localLanguage = localStorage.getItem("i18nextLng") || "en";
+  const localLanguage =
+    localStorage.getItem("i18nextLng") ?? i18n.languages[0] ?? "en";
   i18n.changeLanguage(localLanguage);
 }
 

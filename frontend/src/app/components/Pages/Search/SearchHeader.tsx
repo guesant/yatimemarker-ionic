@@ -18,8 +18,11 @@ import { arrowBack } from "ionicons/icons";
 import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import { SearchContext } from "./Hooks/SearchContext";
+import { useTranslation } from "react-i18next";
+import "../../../../translations/i18n";
 
 const SearchHeader: React.FC = () => {
+  const { t } = useTranslation();
   const history = useHistory();
   const { isMode, searchText, updateSearchText } = useContext(SearchContext);
   const searchInputRef = useRef<HTMLIonInputElement>(null);
@@ -50,7 +53,7 @@ const SearchHeader: React.FC = () => {
     <Fragment>
       <IonToolbar>
         <div className="tw-sr-only">
-          <IonTitle>Busca</IonTitle>
+          <IonTitle>{t("search_header")}</IonTitle>
         </div>
         <IonButtons slot="start">
           <IonButton
@@ -67,7 +70,7 @@ const SearchHeader: React.FC = () => {
           <IonInput
             value={searchText}
             ref={searchInputRef}
-            placeholder="Buscar..."
+            placeholder={t("search_text_input")}
             onFocus={() => {
               updateSearchText(searchText, "suggestions");
             }}

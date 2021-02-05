@@ -23,40 +23,46 @@ import {
 } from "../../../constants/defaultDuration";
 import { setSettings } from "../../../store/settings/actions/setSettings";
 import { ISettingsState } from "../../../types/Settings";
+import { useTranslation } from "react-i18next";
+import "../../../../translations/i18n";
 
 const SettingsDuration = () => {
+  const { t } = useTranslation();
   const settings = useSelector(
     (state): ISettingsState => (state as any).settings,
   );
   const { duration } = settings;
   const dispatch = useDispatch();
+
+  const options = [
+    {
+      ref: "train",
+      text: t("settings_duration_train"),
+      defaultValue: DEFAULT_TRAIN_DURATION,
+    },
+    {
+      ref: "interval",
+      text: t("settings_duration_interval"),
+      defaultValue: DEFAULT_INTERVAL_DURATION,
+    },
+    {
+      ref: "startCountdown",
+      text: t("settings_duration_countdown"),
+      defaultValue: DEFAULT_START_COUNTDOWN_DURATION,
+    },
+  ] as {
+    text: string;
+    ref: keyof typeof duration;
+    defaultValue: string;
+  }[];
+
   return (
     <>
       <IonList>
         <IonListHeader>
-          <IonLabel>Duração</IonLabel>
+          <IonLabel>{t("settings_duration")}</IonLabel>
         </IonListHeader>
-        {([
-          {
-            ref: "train",
-            text: "Treino",
-            defaultValue: DEFAULT_TRAIN_DURATION,
-          },
-          {
-            ref: "interval",
-            text: "Intervalo",
-            defaultValue: DEFAULT_INTERVAL_DURATION,
-          },
-          {
-            ref: "startCountdown",
-            text: "Contagem Regressiva",
-            defaultValue: DEFAULT_START_COUNTDOWN_DURATION,
-          },
-        ] as {
-          text: string;
-          ref: keyof typeof duration;
-          defaultValue: string;
-        }[]).map(({ text, ref, defaultValue }) => {
+        {options.map(({ text, ref, defaultValue }) => {
           const updateValue = (newValue: string) => {
             dispatch(
               setSettings(
@@ -77,8 +83,9 @@ const SettingsDuration = () => {
                   value={duration[ref]}
                   onIonChange={(e) => updateValue(e.detail.value!)}
                   onIonBlur={() => {
-                    const currentValue = String(duration[ref]);
-                    updateValue(parseDuration(defaultValue)(currentValue));
+                    updateValue(
+                      parseDuration(defaultValue)(String(duration[ref])),
+                    );
                   }}
                 />
               </IonItem>

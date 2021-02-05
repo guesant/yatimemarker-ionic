@@ -10,6 +10,8 @@ import React from "react";
 import CRUDTrainContentStepsAddStep from "./CRUDTrainContentStepsAddStep";
 import CRUDTrainContentStepsList from "./CRUDTrainContentStepsList";
 import { CRUDTrainProps } from "./CRUDTrainProps";
+import { useTranslation } from "react-i18next";
+import "../../../../../translations/i18n";
 
 export type CRUDTrainContentStepsProps = CRUDTrainProps & {
   newStep: any;
@@ -21,10 +23,11 @@ const CRUDTrainContentSteps: React.FC<CRUDTrainContentStepsProps> = ({
   toEditIndex,
   ...crudProps
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <IonItemDivider>
-        <IonLabel>Passos</IonLabel>
+        <IonLabel>{t("crud_train_content_steps_label")}</IonLabel>
       </IonItemDivider>
       <div className="tw-px-4">
         <CRUDTrainContentStepsList {...crudProps} toEditIndex={toEditIndex} />

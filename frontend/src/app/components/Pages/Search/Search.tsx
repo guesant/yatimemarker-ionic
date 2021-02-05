@@ -15,7 +15,6 @@ import SearchSuggestionsContent from "./SearchSuggestionsContent";
 
 const SearchPage: React.FC = () => {
   const { isMode } = useContext(SearchContext);
-
   return (
     <>
       <IonHeader>

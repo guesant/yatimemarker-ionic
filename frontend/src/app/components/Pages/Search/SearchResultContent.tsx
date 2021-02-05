@@ -23,34 +23,19 @@ import React, {
 import { useHistory } from "react-router";
 import { ROUTE_TRAIN_VIEW } from "../../Routes";
 import { SearchContext } from "./Hooks/SearchContext";
+import { useTranslation } from "react-i18next";
+import "../../../../translations/i18n";
 
 const OPTION_PAYLOAD_ONLY_TRAIN = ["title"];
 const OPTION_PAYLOAD_ONLY_STEPS = ["steps"];
 const OPTION_PAYLOAD_BOTH_TRAIN_STEPS = ["title", "steps"];
-
-const SEGMENT_OPTIONS = [
-  {
-    value: "title",
-    children: "Treinos",
-    payload: OPTION_PAYLOAD_ONLY_TRAIN,
-  },
-  {
-    value: "steps",
-    children: "Passos",
-    payload: OPTION_PAYLOAD_ONLY_STEPS,
-  },
-  {
-    value: "both",
-    children: "Treinos & Passos",
-    payload: OPTION_PAYLOAD_BOTH_TRAIN_STEPS,
-  },
-];
 
 const isOptionSelected = (selectedOption: string[]) => (option: string[]) =>
   selectedOption.length === option.length &&
   option.every((i) => selectedOption.includes(i));
 
 const SearchResultContent: React.FC = () => {
+  const { t } = useTranslation();
   const history = useHistory();
   const [hasFoundResults, setHasFoundResults] = useState(true);
   const {
@@ -65,6 +50,24 @@ const SearchResultContent: React.FC = () => {
     "title" | "steps" | "both" | null
   >(null);
 
+  const SEGMENT_OPTIONS = [
+    {
+      value: "title",
+      children: t("search_trains"),
+      payload: OPTION_PAYLOAD_ONLY_TRAIN,
+    },
+    {
+      value: "steps",
+      children: t("search_steps"),
+      payload: OPTION_PAYLOAD_ONLY_STEPS,
+    },
+    {
+      value: "both",
+      children: t("search_trains_and_steps"),
+      payload: OPTION_PAYLOAD_BOTH_TRAIN_STEPS,
+    },
+  ];
+
   useEffect(() => {
     if (searchOptions.length === 0) {
       setSearchOptions(["title"]);
@@ -78,7 +81,7 @@ const SearchResultContent: React.FC = () => {
     if (target && target.value !== selectedSegment) {
       setSelectedSegment(target.value as any);
     }
-  }, [searchOptions, selectedSegment]);
+  }, [SEGMENT_OPTIONS, searchOptions, selectedSegment]);
 
   const verifyHasFoundResults = useCallback(
     debounce(() => {
@@ -128,7 +131,7 @@ const SearchResultContent: React.FC = () => {
           {!hasFoundResults && (
             <div className="tw-py-4">
               <div className="tw-px-4">
-                <IonLabel>Nenhum resultado encontrado.</IonLabel>
+                <IonLabel>{t("search_no_results_found")}</IonLabel>
               </div>
             </div>
           )}
@@ -142,9 +145,7 @@ const SearchResultContent: React.FC = () => {
                       <Fragment key={idx}>
                         <IonItem
                           button
-                          onClick={() => {
-                            history.push(ROUTE_TRAIN_VIEW({ id }));
-                          }}
+                          onClick={() => history.push(ROUTE_TRAIN_VIEW({ id }))}
                         >
                           <IonLabel>{title}</IonLabel>
                         </IonItem>
