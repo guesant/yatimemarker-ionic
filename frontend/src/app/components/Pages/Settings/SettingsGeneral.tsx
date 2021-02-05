@@ -17,20 +17,7 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../../../translations/i18n";
-
-const supportedLanguages = [
-  {
-    value: "en",
-    label: "English",
-  },
-  {
-    value: "pt_BR",
-    label: "Português (Brasil)",
-  },
-] as {
-  value: string;
-  label: string | undefined;
-}[];
+import { supportedLanguages } from "../../../../translations/supportedLanguages";
 
 const getData = (i18n: any, lang: string) => (key: string) => {
   return (i18n.getDataByLanguage(lang)?.translation || {})[key] ?? "";
