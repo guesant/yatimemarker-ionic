@@ -5,6 +5,9 @@
  */
 //endregion
 
+export * from "./IComparedSuggestion";
+export * from "./ISearchTrainsOptions";
+export * from "./ISuggestionResult";
 export * from "./ITrain";
 export * from "./ITrainContext";
 export * from "./ITrainStep";
