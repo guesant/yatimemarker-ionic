@@ -1,3 +1,10 @@
+//region Preamble
+/**
+ * SPDX-License-Identifier: MIT
+ * Copyright © 2021 Gabriel Rodrigues
+ */
+//endregion
+
 import PouchDB from "pouchdb";
 import MemoryAdapter from "pouchdb-adapter-memory";
 import { verifyCanPerformIndexedDB } from "../utils/canPerformIndexedDB";
