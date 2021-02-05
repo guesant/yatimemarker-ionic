@@ -32,77 +32,66 @@ const StartTrainWithRunner: React.FC<{
   isTrainDone: boolean;
 }> = ({ isTrainDone }) => {
   const history = useHistory();
+  const [showLeftAlertConfirm, setShowLeftAlertConfirm] = useState(false);
+  const { appTimer } = useContext(StartTrainContext);
+
+  const exitTrain = () => history.go(-1);
+
+  function showAlertToExitTrain() {
+    if (isTrainDone) return exitTrain();
+    if (appTimer) {
+      appTimer.pause();
+      setShowLeftAlertConfirm(true);
+    }
+  }
 
   return (
-    <>
-      {(() => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const [showLeftAlertConfirm, setShowLeftAlertConfirm] = useState(false);
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const { appTimer } = useContext(StartTrainContext);
-
-        const exitTrain = () => history.go(-1);
-
-        function showAlertToExitTrain() {
-          if (isTrainDone) return exitTrain();
-          if (appTimer) {
-            appTimer.pause();
-            setShowLeftAlertConfirm(true);
-          }
-        }
-
-        return (
-          <IonPage>
-            <IonHeader>
-              <IonToolbar>
-                <IonButtons slot="start">
-                  <IonButton onClick={() => showAlertToExitTrain()}>
-                    <IonIcon icon={arrowBack} />
-                  </IonButton>
-                </IonButtons>
-                <IonTitle>Treino</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent>
-              <>
-                {!isTrainDone && (
-                  <>
-                    <div style={{ zIndex: 0 }}>
-                      <StartTrainRunner />
-                    </div>
-                    <div style={{ zIndex: 1 }}>
-                      <IonAlert
-                        isOpen={showLeftAlertConfirm}
-                        onDidDismiss={() => setShowLeftAlertConfirm(false)}
-                        header={"Left Train"}
-                        message={
-                          "Você tem certeza de que deseja sair deste treino?"
-                        }
-                        buttons={[
-                          { text: "Não", role: "cancel", handler: () => {} },
-                          { text: "Sim", handler: () => exitTrain() },
-                        ]}
-                      />
-                    </div>
-                  </>
-                )}
-                {isTrainDone && (
-                  <>
-                    <div>
-                      <div className="tw-py-4">
-                        <div className="tw-px-4">
-                          <p>Feito.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </>
-            </IonContent>
-          </IonPage>
-        );
-      })()}
-    </>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton onClick={() => showAlertToExitTrain()}>
+              <IonIcon icon={arrowBack} />
+            </IonButton>
+          </IonButtons>
+          <IonTitle>Treino</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <>
+          {!isTrainDone && (
+            <>
+              <div style={{ zIndex: 1 }}>
+                <StartTrainRunner />
+              </div>
+              <div style={{ zIndex: 2 }}>
+                <IonAlert
+                  isOpen={!isTrainDone && showLeftAlertConfirm}
+                  onDidDismiss={() => setShowLeftAlertConfirm(false)}
+                  header={"Left Train"}
+                  message={"Você tem certeza de que deseja sair deste treino?"}
+                  buttons={[
+                    { text: "Não", role: "cancel", handler: () => {} },
+                    { text: "Sim", handler: () => exitTrain() },
+                  ]}
+                />
+              </div>
+            </>
+          )}
+          {isTrainDone && (
+            <>
+              <div>
+                <div className="tw-py-4">
+                  <div className="tw-px-4">
+                    <p>Feito.</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </>
+      </IonContent>
+    </IonPage>
   );
 };
 
