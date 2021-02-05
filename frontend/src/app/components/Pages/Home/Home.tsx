@@ -20,7 +20,8 @@ import {
   IonRefresherContent,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { Api, ITrain } from "@ya-time-marker/lib";
+import { ITrain } from "@ya-time-marker/lib";
+import { Trains } from "@ya-time-marker/lib/build/Services/Trains";
 import {
   add,
   caretUp,
@@ -37,10 +38,6 @@ import { ROUTE_SEARCH, ROUTE_SETTINGS, ROUTE_TRAIN_NEW } from "../../Routes";
 import TrainCard from "../../TrainCard";
 import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
-const {
-  Trains: { getTrains },
-} = Api;
-
 const Home: React.FC = () => {
   const history = useHistory();
   const [trains, setTrains] = useState<ITrain[]>([]);
@@ -51,7 +48,7 @@ const Home: React.FC = () => {
   async function fetchTrains() {
     setIsLoading(true);
     try {
-      setTrains((await getTrains()) as any[]);
+      setTrains((await Trains.getTrains()) as any[]);
     } catch (_) {}
     setIsLoading(false);
   }

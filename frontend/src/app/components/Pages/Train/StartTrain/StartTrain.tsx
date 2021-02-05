@@ -17,7 +17,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { ITrain } from "@ya-time-marker/lib";
-import { getTrain } from "@ya-time-marker/lib/build/Api/Trains";
+import { Trains } from "@ya-time-marker/lib/build/Services/Trains";
 import { arrowBack } from "ionicons/icons";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -114,7 +114,7 @@ const StartTrain: React.FC = () => {
 
   useEffect(() => {
     if ((!data || data._id !== id) && !isLoading) {
-      makeFetch(() => getTrain(id));
+      makeFetch(() => Trains.getTrain(id));
     }
   }, [id, data, makeFetch, isLoading]);
 

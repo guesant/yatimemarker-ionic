@@ -5,7 +5,7 @@
  */
 //endregion
 
-import { ITrain } from "../../../types/ITrain";
+import { ITrain } from "../types/ITrain";
 
 export const extractField = (document: any, fieldName: string) => {
   switch (fieldName) {

@@ -5,7 +5,7 @@
  */
 //endregion
 
-import { Api } from "@ya-time-marker/lib";
+import { Trains } from "@ya-time-marker/lib/build/Services/Trains";
 import debounce from "lodash.debounce";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { IStateSetter } from "../../../../types/IStateSetter";
@@ -40,7 +40,7 @@ export const SearchContextProvider: React.FC = ({ children }) => {
     debounce(async (searchQuery: string) => {
       setIsLoading(true);
       try {
-        setSearchSuggestions(await Api.Trains.searchSuggestions(searchQuery));
+        setSearchSuggestions(await Trains.searchSuggestions(searchQuery));
       } catch (_) {
         setSearchSuggestions([]);
       }
@@ -57,7 +57,7 @@ export const SearchContextProvider: React.FC = ({ children }) => {
         try {
           if (searchQuery.trim()) {
             setSearchResults(
-              await Api.Trains.searchTrains(searchQuery, {
+              await Trains.searchTrains(searchQuery, {
                 searchFields:
                   searchOptionsRef.length > 0
                     ? (searchOptionsRef as any[])

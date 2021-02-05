@@ -9,7 +9,7 @@ import { IonButton, IonButtons } from "@ionic/react";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DoneIcon from "@material-ui/icons/Done";
-import { addTrain } from "@ya-time-marker/lib/build/Api/Trains/addTrain";
+import { Trains } from "@ya-time-marker/lib/build/Services/Trains";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
@@ -34,7 +34,7 @@ export const NewTrainHeader: React.FC = () => {
   }, [title, steps]);
 
   async function saveTrain() {
-    addTrain(train);
+    await Trains.addTrain(train);
     history.push(ROUTE_HOME());
   }
 

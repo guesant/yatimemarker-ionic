@@ -22,8 +22,7 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { ITrain } from "@ya-time-marker/lib";
-import { deleteTrain } from "@ya-time-marker/lib/build/Api/Trains/deleteTrain";
-import { getTrain } from "@ya-time-marker/lib/build/Api/Trains/getTrain";
+import { Trains } from "@ya-time-marker/lib/build/Services/Trains";
 import { computeAllTrainDurations } from "@ya-time-marker/lib/build/utils/computeAllTrainDurations";
 import { computeStepDuration } from "@ya-time-marker/lib/build/utils/computeStepDuration";
 import { close, trash } from "ionicons/icons";
@@ -49,12 +48,12 @@ const ViewTrain: React.FC = () => {
 
   useEffect(() => {
     if ((!train || train._id !== id) && !isLoading) {
-      makeFetch(() => getTrain(id));
+      makeFetch(() => Trains.getTrain(id));
     }
   }, [id, train, makeFetch, isLoading]);
 
   const actionDeleteTrain = useCallback(async () => {
-    await deleteTrain(id);
+    await Trains.deleteTrain(id);
     history.push(ROUTE_HOME());
   }, [history, id]);
 
