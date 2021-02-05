@@ -145,13 +145,12 @@ const Home: React.FC = () => {
                 {([
                   {
                     text: t("settings"),
-                    action: () => history.push(ROUTE_SETTINGS()),
+                    callback: () => history.push(ROUTE_SETTINGS()),
                   },
                 ] as {
                   text: string;
-                  action: () => any;
-                  hidePopOver?: boolean;
-                }[]).map(({ text, action }, idx, { length }) => (
+                  callback: () => any;
+                }[]).map(({ text, callback }, idx, { length }) => (
                   <Fragment key={idx}>
                     <IonItem
                       button
@@ -159,7 +158,7 @@ const Home: React.FC = () => {
                       children={text}
                       onClick={() => {
                         displayPopOver(undefined);
-                        action();
+                        callback();
                       }}
                       {...(idx === length - 1 ? { lines: "none" } : {})}
                     />
