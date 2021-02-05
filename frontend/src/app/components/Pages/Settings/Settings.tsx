@@ -30,14 +30,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "../../../../translations/i18n";
 import SVGBandeiraRO from "../../../assets/img/bandeira-ro.svg";
+import {
+  AUTHOR,
+  SOURCE_CODE,
+  SOURCE_CODE_LICENSE,
+} from "../../../constants/ABOUT_PROJECT";
 import { setSettings } from "../../../store/settings/actions/setSettings";
 import { getSettings } from "../../../store/settings/selectors/getSettings";
 import SettingsDuration from "./SettingsDuration";
-
-const sourceCodeURL = "https://github.com/guesant/ya-time-marker-ionic";
-const licenseURL =
-  "https://github.com/guesant/ya-time-marker-ionic/blob/dev/LICENSE.mit.txt";
-const licenseID = "MIT";
 
 const supportedThemes = [
   {
@@ -239,25 +239,31 @@ const Settings: React.FC = () => {
             <IonItem button>
               <IonLabel>
                 <h2>{t("settings_about_author")}</h2>
-                <p>Gabriel Rodrigues</p>
+                <p>{AUTHOR.text}</p>
               </IonLabel>
             </IonItem>
-            <a href={sourceCodeURL} target="_blank" rel="noopener noreferrer">
-              <IonItem button>
-                <IonLabel>
-                  <h2>{t("settings_about_sourceCode")}</h2>
-                  <p>{sourceCodeURL}</p>
-                </IonLabel>
-              </IonItem>
-            </a>
-            <a href={licenseURL} target="_blank" rel="noopener noreferrer">
-              <IonItem button>
-                <IonLabel>
-                  <h2>{t("settings_about_license")}</h2>
-                  <p>{licenseID}</p>
-                </IonLabel>
-              </IonItem>
-            </a>
+            <IonItem
+              button
+              target="_blank"
+              rel="noopener noreferrer"
+              href={SOURCE_CODE.homepage}
+            >
+              <IonLabel>
+                <h2>{t("settings_about_sourceCode")}</h2>
+                <p>{SOURCE_CODE.homepage}</p>
+              </IonLabel>
+            </IonItem>
+            <IonItem
+              button
+              target="_blank"
+              rel="noopener noreferrer"
+              href={SOURCE_CODE_LICENSE.homepage}
+            >
+              <IonLabel>
+                <h2>{t("settings_about_license")}</h2>
+                <p>{SOURCE_CODE_LICENSE.text}</p>
+              </IonLabel>
+            </IonItem>
           </IonList>
         </div>
         <div>
