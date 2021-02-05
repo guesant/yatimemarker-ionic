@@ -18,16 +18,16 @@ import { useAppThemeUpdater } from "../../Hooks/useAppThemeUpdater";
 import { useTranslation } from "react-i18next";
 import "../../../../translations/i18n";
 
-const supportedThemes = [
-  {
-    value: "_auto",
-    i18nKey: "auto",
-  },
-  ...["light", "dark"].map((i) => ({ value: i, i18nKey: i })),
-].map(({ i18nKey, ...i }) => ({
-  ...i,
-  i18nKey: ["settings_apparence_theme", i18nKey].join("_"),
-}));
+const getSupportedThemes = () =>
+  [["_auto", "auto"], ["light"], ["dark"]]
+    .map(([value, i18nKey]) => [value, i18nKey || value])
+    .map(([value, i18nKey]) => ({ value, i18nKey }))
+    .map(({ i18nKey, ...i }) => ({
+      ...i,
+      i18nKey: ["settings_apparence_theme", i18nKey].join("_"),
+    }));
+
+const supportedThemes = getSupportedThemes();
 
 const SettingsApparence = () => {
   const [theme, setColorTheme] = useAppThemeUpdater();
