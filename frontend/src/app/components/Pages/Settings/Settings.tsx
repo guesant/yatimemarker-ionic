@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "../../../../translations/i18n";
+import SVGBandeiraRO from "../../../assets/img/bandeira-ro.svg";
 import { setSettings } from "../../../store/settings/actions/setSettings";
 import { getSettings } from "../../../store/settings/selectors/getSettings";
 import SettingsDuration from "./SettingsDuration";
@@ -258,6 +259,28 @@ const Settings: React.FC = () => {
               </IonItem>
             </a>
           </IonList>
+        </div>
+        <div>
+          <div className="tw-py-4">
+            <div className="tw-px-4">
+              <div className="tw-pointer-events-none tw-select-none tw-flex tw-flex-wrap tw-items-center tw-opacity-20">
+                <p>Feito em Ji-Paraná, RO.</p>
+                <span className="tw-ml-1 tw-mr-2">-</span>
+                <img
+                  src={SVGBandeiraRO}
+                  alt="RO"
+                  style={{
+                    borderRadius: "25%",
+                    width: "1.125rem",
+                    height: "1.125rem",
+                    maxWidth: "24px",
+                    maxHeight: "24px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </IonContent>
     </IonPage>

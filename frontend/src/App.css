@@ -7,3 +7,15 @@
     height: 100%;
   }
 }
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+}
