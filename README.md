@@ -2,6 +2,8 @@
 
 Marcador de tempo feito com [Ionic](https://ionicframework.com/) + [ReactJS](https://reactjs.org/).
 
+Demo: <https://yatime.surge.sh>.
+
 ## Política de Privacidade
 
 As [Versões Oficiais](#versões-oficiais) deste app **não coletam e nunca irão coletar ou reportar dados dos usuários**. Os dados armazenados e histórico de uso **são salvos localmente**. Se o usuário optar, poderá **importar**, **exportar** e **excluir** livremente esses dados.
